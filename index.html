@@ -807,9 +807,9 @@
     <h1>We Do the<br><em>Heavy Lifting.</em><br>You Run Your Business.</h1>
     <p class="hero-sub">AI automation built for restaurants, bars, breweries, and cafes — plain and simple, no tech degree required.</p>
 
-    <form class="hero-form" action="mailto:hello@theworkhorse.ai" method="get" enctype="text/plain">
+    <form class="hero-form" onsubmit="window.location.href='#waitlist'; return false;">
       <input type="email" name="email" placeholder="Enter your email address" required />
-      <button type="submit" class="btn-primary">Get Early Access →</button>
+      <button type="submit" class="btn-primary">Book Free Audit →</button>
     </form>
     <p class="hero-fine">No credit card. No commitment. Just early access.</p>
 
@@ -974,40 +974,8 @@
         </div>
 
         <div class="waitlist-right">
-          <form class="contact-form" action="mailto:hello@theworkhorse.ai" method="get" enctype="text/plain">
-            <div class="form-group">
-              <label for="name">Your Name</label>
-              <input type="text" id="name" name="name" placeholder="First and last name" required />
-            </div>
-
-            <div class="form-group">
-              <label for="email2">Email Address</label>
-              <input type="email" id="email2" name="email" placeholder="you@yourbusiness.com" required />
-            </div>
-
-            <div class="form-group">
-              <label for="biztype">Type of Business</label>
-              <select id="biztype" name="business_type">
-                <option value="" disabled selected>Select your business type</option>
-                <option value="brewery">Brewery</option>
-                <option value="restaurant">Restaurant</option>
-                <option value="bar">Bar / Taproom</option>
-                <option value="food-truck">Food Truck</option>
-                <option value="cafe">Cafe / Coffee Shop</option>
-                <option value="other">Other</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="biggestpain">Biggest Headache Right Now</label>
-              <textarea id="biggestpain" name="biggest_pain" placeholder="Tell us what's eating up the most time..."></textarea>
-            </div>
-
-            <div class="form-submit">
-              <button type="submit" class="btn-primary">Get My Spot on the Waitlist →</button>
-            </div>
-            <p class="form-note">We'll reach out personally. No spam, ever.</p>
-          </form>
+          <iframe data-tally-src="https://tally.so/embed/VL8Rov?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="400" frameborder="0" marginheight="0" marginwidth="0" title="Book Your Free Audit" style="border:none;min-height:400px;"></iframe>
+          <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>
         </div>
       </div>
     </div>
