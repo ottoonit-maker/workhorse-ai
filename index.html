@@ -974,8 +974,62 @@
         </div>
 
         <div class="waitlist-right">
-          <iframe data-tally-src="https://tally.so/embed/VL8Rov?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="400" frameborder="0" marginheight="0" marginwidth="0" title="Book Your Free Audit" style="border:none;min-height:400px;"></iframe>
-          <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>
+          <form class="contact-form" action="https://formspree.io/f/maqpgbqv" method="POST" id="audit-form">
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" name="name" placeholder="First and last name" required />
+            </div>
+
+            <div class="form-group">
+              <label for="email2">Email Address</label>
+              <input type="email" id="email2" name="email" placeholder="you@yourbusiness.com" required />
+            </div>
+
+            <div class="form-group">
+              <label for="biztype">Type of Business</label>
+              <select id="biztype" name="business_type">
+                <option value="" disabled selected>Select your business type</option>
+                <option value="brewery">Brewery</option>
+                <option value="restaurant">Restaurant</option>
+                <option value="bar">Bar / Taproom</option>
+                <option value="food-truck">Food Truck</option>
+                <option value="cafe">Cafe / Coffee Shop</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="biggestpain">Biggest Headache Right Now</label>
+              <textarea id="biggestpain" name="biggest_pain" placeholder="Tell us what's eating up the most time..."></textarea>
+            </div>
+
+            <div class="form-submit">
+              <button type="submit" class="btn-primary">Book My Free Audit →</button>
+            </div>
+            <p class="form-note">We'll reach out personally. No spam, ever.</p>
+          </form>
+          <div id="form-success" style="display:none; padding:32px; text-align:center;">
+            <div style="font-size:2rem; margin-bottom:16px;">✓</div>
+            <h3 style="font-family:var(--font-display); font-size:1.4rem; color:var(--light); margin-bottom:10px; text-transform:uppercase; letter-spacing:0.04em;">You're on the list.</h3>
+            <p style="color:var(--muted); font-size:0.95rem;">We'll reach out personally within 24 hours to schedule your free audit.</p>
+          </div>
+          <script>
+            var form = document.getElementById('audit-form');
+            form.addEventListener('submit', function(e) {
+              e.preventDefault();
+              var data = new FormData(form);
+              fetch(form.action, {
+                method: 'POST',
+                body: data,
+                headers: { 'Accept': 'application/json' }
+              }).then(function(response) {
+                if (response.ok) {
+                  form.style.display = 'none';
+                  document.getElementById('form-success').style.display = 'block';
+                }
+              });
+            });
+          </script>
         </div>
       </div>
     </div>
