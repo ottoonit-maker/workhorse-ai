@@ -54,7 +54,7 @@
       z-index: 100;
       background: transparent;
       transition: background 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease;
-      border-bottom: 1px solid transparent;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
       padding: 0 24px;
     }
 
@@ -124,22 +124,21 @@
 
     /* ─── Hero ── */
     #hero {
-      padding: 100px 24px 120px;
+      padding: 140px 24px 100px;
       text-align: center;
       background-color: var(--bg);
-      background-image: radial-gradient(ellipse 50% 35% at 50% 0%, rgba(181,52,28,0.12) 0%, transparent 70%);
       position: relative;
       overflow: visible;
     }
 
     .hero-eyebrow {
       display: inline-block;
-      background: rgba(181, 52, 28, 0.1);
-      border: 1px solid rgba(181, 52, 28, 0.25);
-      color: var(--accent);
+      background: rgba(181,52,28,0.18);
+      border: 1px solid rgba(181,52,28,0.5);
+      color: #e87a5a;
       font-family: var(--font-sans);
-      font-size: 0.6875rem;
-      font-weight: 600;
+      font-size: 0.75rem;
+      font-weight: 700;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       padding: 6px 14px;
@@ -159,10 +158,9 @@
     }
 
     #hero h1 em {
-      font-family: var(--font-display);
+      font-family: var(--font-sans);
       font-style: italic;
       color: var(--accent);
-      font-weight: 700;
     }
 
     .hero-sub {
@@ -249,8 +247,8 @@
     #social-proof {
       padding: 56px 24px;
       background: var(--bg);
-      border-top: 1px solid var(--border-light);
-      border-bottom: 1px solid var(--border-light);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
       text-align: center;
     }
 
@@ -283,7 +281,7 @@
 
     .proof-num {
       font-family: var(--font-sans);
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: 800;
       color: var(--text);
       letter-spacing: -0.03em;
@@ -911,9 +909,6 @@
 
   <!-- ── Hero ── -->
   <section id="hero">
-    <div style="margin-bottom: 32px; padding-top: 20px; width: 100%; box-sizing: border-box;">
-      <img src="logo-full.png" alt="Workhorse AI" style="width: 100%; max-width: 420px; height:auto; display:block; margin:0 auto;">
-    </div>
     <div class="hero-eyebrow">Now Accepting Early Access</div>
     <h1>We Do the <em>Heavy</em> Lifting.<br>You Run Your Business.</h1>
     <p class="hero-sub">AI automation built for restaurants, bars, breweries, and cafes — plain and simple, no tech degree required.</p>
@@ -1149,9 +1144,8 @@
   <!-- ── Footer ── -->
   <footer>
     <div class="footer-logo">
-      <img src="logo.png" alt="Workhorse AI" style="height:48px; width:auto; opacity:0.9;">
+      <img src="logo-full.png" alt="Workhorse AI" style="width: 200px; height: auto; display: block; margin: 0 auto 12px;">
     </div>
-    <div class="footer-tagline">We do the heavy lifting.</div>
     <div class="footer-links">
       <a href="#hero">Home</a>
       <a href="#pain">Why Workhorse</a>
