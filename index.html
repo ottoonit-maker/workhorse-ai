@@ -28,8 +28,7 @@
     html { scroll-behavior: smooth; }
 
     body {
-      background: #080808;
-      background-image: radial-gradient(ellipse 100% 50% at 50% 0%, rgba(181,52,28,0.12) 0%, transparent 50%);
+      background: var(--bg);
       color: var(--text);
       font-family: var(--font-sans);
       font-size: 16px;
@@ -129,11 +128,11 @@
     #hero {
       padding: 140px 24px 100px;
       text-align: center;
-      background: transparent;
+      background-color: #080808;
       background-image:
-        radial-gradient(ellipse 80% 70% at 50% -5%, rgba(181,52,28,0.35) 0%, rgba(181,52,28,0.1) 40%, transparent 70%),
-        radial-gradient(ellipse 50% 40% at 15% 90%, rgba(181,52,28,0.1) 0%, transparent 50%),
-        radial-gradient(ellipse 40% 30% at 85% 70%, rgba(181,52,28,0.07) 0%, transparent 50%);
+        radial-gradient(ellipse 70% 60% at 50% -10%, rgba(181,52,28,0.25) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(181,52,28,0.08) 0%, transparent 50%),
+        radial-gradient(ellipse 30% 30% at 80% 60%, rgba(181,52,28,0.06) 0%, transparent 50%);
       position: relative;
       overflow: hidden;
     }
@@ -265,7 +264,7 @@
     /* ─── Social Proof Bar ── */
     #social-proof {
       padding: 56px 24px;
-      background: transparent;
+      background: var(--bg);
       border-top: 1px solid rgba(255,255,255,0.06);
       border-bottom: 1px solid rgba(255,255,255,0.06);
       text-align: center;
@@ -305,7 +304,7 @@
       color: var(--text);
       letter-spacing: -0.03em;
       line-height: 1;
-      text-shadow: 0 0 30px rgba(181,52,28,0.6);
+      text-shadow: 0 0 20px rgba(181,52,28,0.4);
     }
 
     .proof-label-sm {
@@ -340,7 +339,6 @@
       letter-spacing: -0.02em;
       text-align: center;
       margin-bottom: 16px;
-      text-shadow: 0 0 40px rgba(255,255,255,0.05);
     }
 
     .section-title em {
@@ -367,17 +365,7 @@
     /* ─── Pain Points ── */
     #pain {
       padding: 120px 24px;
-      background: linear-gradient(180deg, #080808 0%, #0d0908 50%, #080808 100%);
-      position: relative;
-    }
-
-    #pain::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 50%; transform: translateX(-50%);
-      width: 600px; height: 300px;
-      background: radial-gradient(ellipse at center, rgba(181,52,28,0.08) 0%, transparent 70%);
-      pointer-events: none;
+      background: linear-gradient(180deg, #080808 0%, #0a0a0a 50%, #080808 100%);
     }
 
     .pain-grid {
@@ -389,17 +377,16 @@
     }
 
     .pain-card {
-      background: linear-gradient(145deg, #141010 0%, #0d0b0a 100%);
-      border: 1px solid rgba(181,52,28,0.12);
+      background: linear-gradient(135deg, #141414 0%, #0f0f0f 100%);
+      border: 1px solid var(--border);
       border-radius: 8px;
       padding: 32px;
       transition: all 0.2s ease;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.03);
     }
 
     .pain-card:hover {
-      border-color: rgba(181,52,28,0.25);
-      box-shadow: 0 4px 32px rgba(181,52,28,0.12), 0 4px 24px rgba(0,0,0,0.4);
+      border-color: #333333;
+      box-shadow: 0 0 0 1px rgba(181, 52, 28, 0.3);
       transform: translateY(-2px);
     }
 
@@ -428,17 +415,7 @@
     /* ─── Solutions ── */
     #solutions {
       padding: 120px 24px;
-      background: linear-gradient(180deg, #080808 0%, #0a0908 30%, #0d0a08 60%, #080808 100%);
-      position: relative;
-    }
-
-    #solutions::after {
-      content: '';
-      position: absolute;
-      bottom: 0; right: 10%;
-      width: 500px; height: 400px;
-      background: radial-gradient(ellipse at center, rgba(181,52,28,0.07) 0%, transparent 70%);
-      pointer-events: none;
+      background: linear-gradient(180deg, #080808 0%, #0c0c0c 50%, #080808 100%);
     }
 
     .solutions-grid {
@@ -450,17 +427,17 @@
     }
 
     .solution-card {
-      background: linear-gradient(145deg, #131010 0%, #0d0b09 100%);
-      border: 1px solid rgba(181,52,28,0.1);
+      background: linear-gradient(135deg, #141414 0%, #0f0f0f 100%);
+      border: 1px solid var(--border);
       border-radius: 8px;
       padding: 32px;
-      transition: all 0.25s ease;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.03);
+      transition: all 0.2s ease;
     }
 
     .solution-card:hover {
+      background: linear-gradient(135deg, #1a1414 0%, #0f0f0f 100%);
       border-color: rgba(181,52,28,0.3);
-      box-shadow: 0 8px 40px rgba(181,52,28,0.15), 0 4px 24px rgba(0,0,0,0.4);
+      box-shadow: 0 0 0 1px rgba(181, 52, 28, 0.3);
       transform: translateY(-2px);
     }
 
@@ -521,18 +498,8 @@
     /* ─── Social Proof / Quote ── */
     #proof {
       padding: 120px 24px;
-      background: linear-gradient(180deg, #080808 0%, #0e0a08 40%, #0a0808 100%);
-      position: relative;
+      background: linear-gradient(180deg, #080808 0%, #0a0a0a 100%);
       text-align: center;
-    }
-
-    #proof::before {
-      content: '';
-      position: absolute;
-      top: 50%; left: 50%; transform: translate(-50%, -50%);
-      width: 800px; height: 400px;
-      background: radial-gradient(ellipse at center, rgba(181,52,28,0.1) 0%, transparent 70%);
-      pointer-events: none;
     }
 
     .proof-quote-wrap {
@@ -559,13 +526,12 @@
     }
 
     .case-study-card {
-      background: linear-gradient(145deg, #151010 0%, #0f0c0a 100%);
-      border: 1px solid rgba(181,52,28,0.15);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
       border-radius: 8px;
       padding: 40px 36px;
       max-width: 600px;
       margin: 0 auto;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.04);
     }
 
     .case-study-tag {
@@ -650,17 +616,7 @@
     /* ─── Waitlist ── */
     #waitlist {
       padding: 120px 24px;
-      background: linear-gradient(180deg, #080808 0%, #0c0908 50%, #080808 100%);
-      position: relative;
-    }
-
-    #waitlist::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 50%; transform: translateX(-50%);
-      width: 700px; height: 500px;
-      background: radial-gradient(ellipse at top, rgba(181,52,28,0.1) 0%, transparent 65%);
-      pointer-events: none;
+      background: var(--bg);
     }
 
     .waitlist-header {
@@ -761,8 +717,6 @@
     .form-group select:focus,
     .form-group textarea:focus {
       border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(181,52,28,0.15);
-      outline: none;
     }
 
     .form-group input::placeholder,
@@ -847,10 +801,10 @@
 
     /* ─── Footer ── */
     footer {
-      background: linear-gradient(180deg, #080808 0%, #060504 100%);
+      background: linear-gradient(180deg, #080808 0%, #050505 100%);
       padding: 56px 24px 40px;
       text-align: center;
-      border-top: 1px solid rgba(181,52,28,0.1);
+      border-top: 1px solid var(--border-light);
     }
 
     .footer-logo {
