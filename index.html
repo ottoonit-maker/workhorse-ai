@@ -28,7 +28,8 @@
     html { scroll-behavior: smooth; }
 
     body {
-      background: var(--bg);
+      background: #080808;
+      background-image: radial-gradient(ellipse 100% 50% at 50% 0%, rgba(181,52,28,0.12) 0%, transparent 50%);
       color: var(--text);
       font-family: var(--font-sans);
       font-size: 16px;
@@ -52,9 +53,11 @@
       left: 0;
       right: 0;
       z-index: 100;
-      background: transparent;
+      background: rgba(8,8,8,0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       transition: background 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease;
-      border-bottom: 1px solid rgba(255,255,255,0.12);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
       padding: 0 24px;
     }
 
@@ -126,10 +129,25 @@
     #hero {
       padding: 140px 24px 100px;
       text-align: center;
-      background-color: var(--bg);
+      background: transparent;
+      background-image:
+        radial-gradient(ellipse 80% 70% at 50% -5%, rgba(181,52,28,0.35) 0%, rgba(181,52,28,0.1) 40%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 15% 90%, rgba(181,52,28,0.1) 0%, transparent 50%),
+        radial-gradient(ellipse 40% 30% at 85% 70%, rgba(181,52,28,0.07) 0%, transparent 50%);
       position: relative;
-      overflow: visible;
+      overflow: hidden;
     }
+
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    #hero > * { position: relative; z-index: 1; }
 
     .hero-eyebrow {
       display: inline-block;
@@ -155,6 +173,7 @@
       max-width: 860px;
       margin: 0 auto 24px;
       letter-spacing: -0.02em;
+      text-shadow: 0 0 60px rgba(255,255,255,0.08);
     }
 
     #hero h1 em {
@@ -246,7 +265,7 @@
     /* ─── Social Proof Bar ── */
     #social-proof {
       padding: 56px 24px;
-      background: var(--bg);
+      background: transparent;
       border-top: 1px solid rgba(255,255,255,0.06);
       border-bottom: 1px solid rgba(255,255,255,0.06);
       text-align: center;
@@ -286,6 +305,7 @@
       color: var(--text);
       letter-spacing: -0.03em;
       line-height: 1;
+      text-shadow: 0 0 30px rgba(181,52,28,0.6);
     }
 
     .proof-label-sm {
@@ -320,6 +340,7 @@
       letter-spacing: -0.02em;
       text-align: center;
       margin-bottom: 16px;
+      text-shadow: 0 0 40px rgba(255,255,255,0.05);
     }
 
     .section-title em {
@@ -346,7 +367,17 @@
     /* ─── Pain Points ── */
     #pain {
       padding: 120px 24px;
-      background: var(--bg);
+      background: linear-gradient(180deg, #080808 0%, #0d0908 50%, #080808 100%);
+      position: relative;
+    }
+
+    #pain::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 300px;
+      background: radial-gradient(ellipse at center, rgba(181,52,28,0.08) 0%, transparent 70%);
+      pointer-events: none;
     }
 
     .pain-grid {
@@ -358,16 +389,17 @@
     }
 
     .pain-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
+      background: linear-gradient(145deg, #141010 0%, #0d0b0a 100%);
+      border: 1px solid rgba(181,52,28,0.12);
       border-radius: 8px;
       padding: 32px;
       transition: all 0.2s ease;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.03);
     }
 
     .pain-card:hover {
-      border-color: #333333;
-      box-shadow: 0 0 0 1px rgba(181, 52, 28, 0.3);
+      border-color: rgba(181,52,28,0.25);
+      box-shadow: 0 4px 32px rgba(181,52,28,0.12), 0 4px 24px rgba(0,0,0,0.4);
       transform: translateY(-2px);
     }
 
@@ -396,7 +428,17 @@
     /* ─── Solutions ── */
     #solutions {
       padding: 120px 24px;
-      background: #0d0d0d;
+      background: linear-gradient(180deg, #080808 0%, #0a0908 30%, #0d0a08 60%, #080808 100%);
+      position: relative;
+    }
+
+    #solutions::after {
+      content: '';
+      position: absolute;
+      bottom: 0; right: 10%;
+      width: 500px; height: 400px;
+      background: radial-gradient(ellipse at center, rgba(181,52,28,0.07) 0%, transparent 70%);
+      pointer-events: none;
     }
 
     .solutions-grid {
@@ -408,16 +450,17 @@
     }
 
     .solution-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
+      background: linear-gradient(145deg, #131010 0%, #0d0b09 100%);
+      border: 1px solid rgba(181,52,28,0.1);
       border-radius: 8px;
       padding: 32px;
-      transition: all 0.2s ease;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.03);
     }
 
     .solution-card:hover {
-      border-color: #333333;
-      box-shadow: 0 0 0 1px rgba(181, 52, 28, 0.3);
+      border-color: rgba(181,52,28,0.3);
+      box-shadow: 0 8px 40px rgba(181,52,28,0.15), 0 4px 24px rgba(0,0,0,0.4);
       transform: translateY(-2px);
     }
 
@@ -478,8 +521,18 @@
     /* ─── Social Proof / Quote ── */
     #proof {
       padding: 120px 24px;
-      background: var(--bg);
+      background: linear-gradient(180deg, #080808 0%, #0e0a08 40%, #0a0808 100%);
+      position: relative;
       text-align: center;
+    }
+
+    #proof::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 800px; height: 400px;
+      background: radial-gradient(ellipse at center, rgba(181,52,28,0.1) 0%, transparent 70%);
+      pointer-events: none;
     }
 
     .proof-quote-wrap {
@@ -506,12 +559,13 @@
     }
 
     .case-study-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
+      background: linear-gradient(145deg, #151010 0%, #0f0c0a 100%);
+      border: 1px solid rgba(181,52,28,0.15);
       border-radius: 8px;
       padding: 40px 36px;
       max-width: 600px;
       margin: 0 auto;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.04);
     }
 
     .case-study-tag {
@@ -596,7 +650,17 @@
     /* ─── Waitlist ── */
     #waitlist {
       padding: 120px 24px;
-      background: var(--bg);
+      background: linear-gradient(180deg, #080808 0%, #0c0908 50%, #080808 100%);
+      position: relative;
+    }
+
+    #waitlist::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%; transform: translateX(-50%);
+      width: 700px; height: 500px;
+      background: radial-gradient(ellipse at top, rgba(181,52,28,0.1) 0%, transparent 65%);
+      pointer-events: none;
     }
 
     .waitlist-header {
@@ -697,6 +761,8 @@
     .form-group select:focus,
     .form-group textarea:focus {
       border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(181,52,28,0.15);
+      outline: none;
     }
 
     .form-group input::placeholder,
@@ -781,10 +847,10 @@
 
     /* ─── Footer ── */
     footer {
-      background: #050505;
+      background: linear-gradient(180deg, #080808 0%, #060504 100%);
       padding: 56px 24px 40px;
       text-align: center;
-      border-top: 1px solid var(--border-light);
+      border-top: 1px solid rgba(181,52,28,0.1);
     }
 
     .footer-logo {
