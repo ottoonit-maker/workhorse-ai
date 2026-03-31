@@ -971,6 +971,82 @@
 
       .perks { flex-direction: column; align-items: center; }
     }
+
+  #how-it-works {
+    padding: 80px 24px;
+  }
+  .steps-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .step {
+    flex: 1;
+    text-align: center;
+    padding: 0 20px;
+  }
+  .step-number {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .step h3 {
+    font-family: var(--font-sans);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+  .step p {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+  .step-arrow {
+    color: var(--accent);
+    font-size: 1.5rem;
+    padding-top: 8px;
+    flex-shrink: 0;
+    opacity: 0.5;
+  }
+  @media (max-width: 700px) {
+    .steps-row { flex-direction: column; align-items: center; gap: 32px; }
+    .step-arrow { transform: rotate(90deg); padding: 0; }
+  }
+
+  #faq {
+    padding: 80px 24px;
+  }
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .faq-item {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .faq-item:first-child {
+    border-top: 1px solid var(--border);
+  }
+  .faq-q {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+  .faq-a {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
   </style>
 </head>
 <body>
@@ -1126,6 +1202,77 @@
           <li>Vendor spend summaries</li>
           <li>Simple dashboards, no fluff</li>
         </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── How It Works ── -->
+  <section id="how-it-works">
+    <div class="container">
+      <div class="section-header" style="text-align:center; margin-bottom: 56px;">
+        <span class="section-label">How it works</span>
+        <h2 class="section-title">Up and Running in Days,<br>Not Months</h2>
+      </div>
+      <div class="steps-row">
+        <div class="step">
+          <div class="step-number">01</div>
+          <div class="step-content">
+            <h3>Free Audit Call</h3>
+            <p>We spend 30 minutes learning your operation — what's eating your time, what tools you use, where the biggest gaps are.</p>
+          </div>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step">
+          <div class="step-number">02</div>
+          <div class="step-content">
+            <h3>We Build It</h3>
+            <p>We design and build your automation in days, not months. You review it before anything goes live. No surprises.</p>
+          </div>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step">
+          <div class="step-number">03</div>
+          <div class="step-content">
+            <h3>It Runs. You Don't.</h3>
+            <p>Your automation runs in the background 24/7. We monitor it, maintain it, and improve it over time. You just run your business.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAQ ── -->
+  <section id="faq">
+    <div class="container" style="max-width: 720px;">
+      <div class="section-header" style="text-align:center; margin-bottom: 48px;">
+        <span class="section-label">FAQ</span>
+        <h2 class="section-title">Common Questions</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <h3 class="faq-q">Do I need to be technical?</h3>
+          <p class="faq-a">Not at all. We handle everything — you just describe your problem in plain English. If you can explain how your business works over a phone call, we can automate it.</p>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-q">How long does it take to get set up?</h3>
+          <p class="faq-a">Most simple automations are live within 3–5 business days after the audit call. More complex workflows typically take 1–2 weeks. We'll give you a clear timeline upfront.</p>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-q">What tools do you use?</h3>
+          <p class="faq-a">We work with whatever you already have — your existing POS, email, forms, and spreadsheets. We don't force you to switch platforms. If you use Toast, Square, Google Workspace, or anything else, we build around it.</p>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-q">What if something breaks?</h3>
+          <p class="faq-a">That's what the monthly retainer covers. We monitor your automations and fix issues fast — usually before you even notice. You're not on your own after launch.</p>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-q">What's the free audit, exactly?</h3>
+          <p class="faq-a">It's a 30-minute call where we review your operations, identify your top 2–3 automation opportunities, and give you a clear action plan — whether you work with us or not. No pitch, no pressure.</p>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-q">I'm not in food &amp; beverage — can you still help?</h3>
+          <p class="faq-a">Probably. We started in F&amp;B but the problems we solve — manual intake, data entry, ordering, follow-ups — exist in almost every service business. Reach out and we'll be honest about whether it's a good fit.</p>
+        </div>
       </div>
     </div>
   </section>
