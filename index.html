@@ -507,6 +507,20 @@
       margin: 0 auto 24px;
     }
 
+    .founder-photo-wrap {
+      margin-bottom: 28px;
+    }
+    .founder-photo {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      border: 2px solid rgba(181,52,28,0.3);
+      display: block;
+      margin: 0 auto;
+      filter: grayscale(20%);
+    }
     blockquote.founder-quote {
       font-family: var(--font-sans);
       font-style: italic;
@@ -1106,6 +1120,9 @@
   <!-- ── Social Proof / Founder Quote ── -->
   <section id="proof">
     <div class="proof-quote-wrap">
+      <div class="founder-photo-wrap">
+        <img src="tom.jpg" alt="Tom F., Founder of Workhorse AI" class="founder-photo">
+      </div>
       <blockquote class="founder-quote">
         I built this because I needed it. Running a brewery, I was drowning in the same admin garbage every week. These tools saved me real hours — so I made them available to everyone running a place like mine.
       </blockquote>
