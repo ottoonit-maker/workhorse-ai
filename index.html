@@ -799,6 +799,53 @@
       color: var(--muted);
     }
 
+    /* ─── Who We Work With ── */
+    #who-we-work-with {
+      padding: 80px 24px;
+    }
+    .who-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+    .who-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 32px;
+      text-align: center;
+      transition: border-color 0.2s;
+    }
+    .who-card:hover {
+      border-color: rgba(181,52,28,0.3);
+    }
+    .who-icon {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+    }
+    .who-card h3 {
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    .who-card p {
+      font-family: var(--font-sans);
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .who-note {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .who-note a {
+      color: var(--accent);
+    }
+
     /* ─── Footer ── */
     footer {
       background: linear-gradient(180deg, #080808 0%, #050505 100%);
@@ -1013,7 +1060,7 @@
       <div class="solution-card">
         <div class="solution-number">01</div>
         <h3>Event & Booking Intake</h3>
-        <p>Never manually handle an event request again. Leads get an instant reply with your info and pricing — and their details go straight into your CRM automatically.</p>
+        <p>A customer fills out your event form — they get an instant reply with your pricing PDF, and their info lands in your Google Sheet automatically. No copy-pasting, no missed leads.</p>
         <ul>
           <li>Instant auto-reply with pricing PDF</li>
           <li>Auto-populate CRM / Google Sheets</li>
@@ -1035,7 +1082,7 @@
       <div class="solution-card">
         <div class="solution-number">03</div>
         <h3>Free Up Your Team</h3>
-        <p>Your people are better than data entry. Give them back the hours they spend on admin and put them where they actually make a difference.</p>
+        <p>Stop paying your staff to re-enter data, send follow-up emails, and chase down orders. We connect your existing tools so information flows automatically — no more manual handoffs.</p>
         <ul>
           <li>Customer communication automation</li>
           <li>Staff scheduling assistance</li>
@@ -1046,7 +1093,7 @@
       <div class="solution-card">
         <div class="solution-number">04</div>
         <h3>Run Leaner, Not Harder</h3>
-        <p>Real-time visibility into your costs, your stock, and your margins — without building a spreadsheet empire to get there.</p>
+        <p>Know exactly what you're spending, what's running low, and where your margins are leaking — without digging through spreadsheets or waiting for your bookkeeper.</p>
         <ul>
           <li>Food &amp; pour cost tracking</li>
           <li>Vendor spend summaries</li>
@@ -1089,6 +1136,35 @@
       <div style="text-align:center;">
         <span class="coming-soon-badge">Full case study dropping at launch</span>
       </div>
+    </div>
+  </section>
+
+  <!-- ── Who We Work With ── -->
+  <section id="who-we-work-with">
+    <div class="container">
+      <div class="section-header" style="text-align:center; margin-bottom: 48px;">
+        <span class="section-label">Who we work with</span>
+        <h2 class="section-title">Built for Independent Operators</h2>
+        <p class="section-desc" style="margin: 0 auto;">We work best with owner-operated food &amp; beverage businesses doing real volume — the kind of place where the owner is still in the weeds and every hour counts.</p>
+      </div>
+      <div class="who-grid">
+        <div class="who-card">
+          <div class="who-icon">🍺</div>
+          <h3>Breweries &amp; Taprooms</h3>
+          <p>Event intake, production tracking, taproom operations. We started here — it's where we know every pain point firsthand.</p>
+        </div>
+        <div class="who-card">
+          <div class="who-icon">🍽️</div>
+          <h3>Restaurants &amp; Bars</h3>
+          <p>Reservation intake, ordering automation, marketing — the stuff that piles up when you're focused on running a tight operation.</p>
+        </div>
+        <div class="who-card">
+          <div class="who-icon">☕</div>
+          <h3>Cafes &amp; Coffee Shops</h3>
+          <p>Wholesale lead intake, catering inquiries, inventory alerts. Small team, big workload — we help you punch above your weight.</p>
+        </div>
+      </div>
+      <p class="who-note">Not in food &amp; beverage? We work with service businesses and trade companies too — <a href="#waitlist">reach out and let's talk</a>.</p>
     </div>
   </section>
 
