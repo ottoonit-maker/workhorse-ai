@@ -857,6 +857,88 @@
       color: #333333;
     }
 
+    /* ─── Proof Bar ── */
+    #proof-bar {
+      background: rgba(181,52,28,0.06);
+      border-top: 1px solid rgba(181,52,28,0.15);
+      border-bottom: 1px solid rgba(181,52,28,0.15);
+      padding: 20px 24px;
+      text-align: center;
+    }
+    .proof-bar-inner {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .proof-bar-label {
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+    .proof-bar-logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .proof-bar-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .proof-bar-icon { font-size: 1rem; }
+    .proof-bar-name {
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .proof-bar-tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      background: rgba(181,52,28,0.15);
+      color: #e87a5a;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+    .proof-bar-stat {
+      font-family: var(--font-sans);
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+    .proof-bar-stat-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .proof-bar-divider {
+      color: var(--muted-light);
+      font-size: 1.2rem;
+    }
+
+    /* ─── Hero Automations ── */
+    .hero-automations {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .hero-automations span {
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--muted);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 6px 14px;
+      border-radius: 20px;
+    }
+
     /* ─── Responsive ── */
     @media (max-width: 768px) {
       .nav-links {
@@ -878,6 +960,11 @@
       .case-study-card {
         padding: 28px 24px;
       }
+    }
+
+    @media (max-width: 600px) {
+      .proof-bar-divider { display: none; }
+      .proof-bar-logos { gap: 12px; }
     }
 
     @media (max-width: 600px) {
@@ -931,19 +1018,56 @@
   <section id="hero">
     <div class="hero-eyebrow">Now Accepting Early Access</div>
     <h1>We Do the <em>Heavy</em> Lifting.<br>You Run Your Business.</h1>
-    <p class="hero-sub">AI automation built for restaurants, bars, breweries, and cafes — plain and simple, no tech degree required.</p>
+    <p class="hero-sub">We automate the manual stuff killing your margins — event intake, inventory tracking, ordering, and marketing. Built by an operator, for operators.</p>
 
     <form class="hero-form" onsubmit="window.location.href='#waitlist'; return false;">
-      <input type="email" name="email" placeholder="Enter your email address" required />
-      <button type="submit" class="btn-hero">Book Free Audit →</button>
+      <input type="email" name="email" placeholder="Your email address" required />
+      <button type="submit" class="btn-hero">Get Early Access →</button>
     </form>
-    <p class="hero-fine">No credit card. No commitment. Just early access.</p>
+    <p class="hero-fine">Free audit. No credit card. No commitment.</p>
 
     <div class="hero-tags">
       <span>🍺 Breweries</span>
       <span>🍽️ Restaurants</span>
       <span>🍸 Bars & Taprooms</span>
       <span>☕ Cafes</span>
+    </div>
+
+    <div class="hero-automations">
+      <span>📋 Event Intake</span>
+      <span>📦 Inventory</span>
+      <span>🛒 Ordering</span>
+      <span>📣 Marketing</span>
+      <span>📝 Lead Capture</span>
+    </div>
+  </section>
+
+  <!-- ── Proof Bar ── -->
+  <section id="proof-bar">
+    <div class="proof-bar-inner">
+      <p class="proof-bar-label">Trusted by operators who actually do the work</p>
+      <div class="proof-bar-logos">
+        <div class="proof-bar-item">
+          <span class="proof-bar-icon">🍺</span>
+          <span class="proof-bar-name">Diamondback Brewing Co.</span>
+          <span class="proof-bar-tag">Live in production</span>
+        </div>
+        <div class="proof-bar-divider">·</div>
+        <div class="proof-bar-item">
+          <span class="proof-bar-stat">5 hrs</span>
+          <span class="proof-bar-stat-label">saved per month</span>
+        </div>
+        <div class="proof-bar-divider">·</div>
+        <div class="proof-bar-item">
+          <span class="proof-bar-stat">&lt;60s</span>
+          <span class="proof-bar-stat-label">response time</span>
+        </div>
+        <div class="proof-bar-divider">·</div>
+        <div class="proof-bar-item">
+          <span class="proof-bar-stat">0</span>
+          <span class="proof-bar-stat-label">missed inquiries</span>
+        </div>
+      </div>
     </div>
   </section>
 
