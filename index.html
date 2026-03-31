@@ -263,58 +263,49 @@
 
     /* ─── Social Proof Bar ── */
     #social-proof {
-      padding: 56px 24px;
-      background: var(--bg);
+      padding: 48px 24px;
       border-top: 1px solid rgba(255,255,255,0.06);
       border-bottom: 1px solid rgba(255,255,255,0.06);
-      text-align: center;
     }
-
-    #social-proof .proof-label {
-      font-family: var(--font-sans);
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted-light);
-      margin-bottom: 36px;
-    }
-
-    .proof-stat-row {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      gap: 64px;
-      flex-wrap: wrap;
+    .social-proof-inner {
       max-width: 860px;
       margin: 0 auto;
-    }
-
-    .proof-stat {
       display: flex;
-      flex-direction: column;
       align-items: center;
-      gap: 8px;
+      justify-content: center;
+      gap: 0;
     }
-
+    .proof-stat {
+      flex: 1;
+      text-align: center;
+      padding: 0 24px;
+    }
     .proof-num {
+      display: block;
       font-family: var(--font-sans);
-      font-size: 2.2rem;
+      font-size: clamp(2.2rem, 5vw, 3rem);
       font-weight: 800;
       color: var(--text);
-      letter-spacing: -0.03em;
       line-height: 1;
-      text-shadow: 0 0 20px rgba(181,52,28,0.4);
+      margin-bottom: 8px;
     }
-
     .proof-label-sm {
       font-family: var(--font-sans);
-      font-size: 0.75rem;
-      font-weight: 400;
-      color: var(--muted-light);
-      text-align: center;
-      max-width: 120px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--muted);
       line-height: 1.4;
+    }
+    .proof-divider {
+      width: 1px;
+      height: 48px;
+      background: rgba(255,255,255,0.08);
+      flex-shrink: 0;
+    }
+    @media (max-width: 600px) {
+      .social-proof-inner { flex-wrap: wrap; gap: 24px; }
+      .proof-divider { display: none; }
+      .proof-stat { flex: 0 0 45%; }
     }
 
     /* ─── Section shared ── */
@@ -857,88 +848,6 @@
       color: #333333;
     }
 
-    /* ─── Proof Bar ── */
-    #proof-bar {
-      background: rgba(181,52,28,0.06);
-      border-top: 1px solid rgba(181,52,28,0.15);
-      border-bottom: 1px solid rgba(181,52,28,0.15);
-      padding: 20px 24px;
-      text-align: center;
-    }
-    .proof-bar-inner {
-      max-width: 860px;
-      margin: 0 auto;
-    }
-    .proof-bar-label {
-      font-family: var(--font-sans);
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 14px;
-    }
-    .proof-bar-logos {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-    .proof-bar-item {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .proof-bar-icon { font-size: 1rem; }
-    .proof-bar-name {
-      font-family: var(--font-sans);
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--text);
-    }
-    .proof-bar-tag {
-      font-size: 0.72rem;
-      font-weight: 600;
-      background: rgba(181,52,28,0.15);
-      color: #e87a5a;
-      padding: 2px 8px;
-      border-radius: 20px;
-    }
-    .proof-bar-stat {
-      font-family: var(--font-sans);
-      font-size: 1.1rem;
-      font-weight: 800;
-      color: var(--text);
-    }
-    .proof-bar-stat-label {
-      font-size: 0.78rem;
-      color: var(--muted);
-    }
-    .proof-bar-divider {
-      color: var(--muted-light);
-      font-size: 1.2rem;
-    }
-
-    /* ─── Hero Automations ── */
-    .hero-automations {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 20px;
-    }
-    .hero-automations span {
-      font-family: var(--font-sans);
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--muted);
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      padding: 6px 14px;
-      border-radius: 20px;
-    }
-
     /* ─── Responsive ── */
     @media (max-width: 768px) {
       .nav-links {
@@ -960,11 +869,6 @@
       .case-study-card {
         padding: 28px 24px;
       }
-    }
-
-    @media (max-width: 600px) {
-      .proof-bar-divider { display: none; }
-      .proof-bar-logos { gap: 12px; }
     }
 
     @media (max-width: 600px) {
@@ -1032,47 +936,31 @@
       <span>🍸 Bars & Taprooms</span>
       <span>☕ Cafes</span>
     </div>
-
-    <div class="hero-automations">
-      <span>📋 Event Intake</span>
-      <span>📦 Inventory</span>
-      <span>🛒 Ordering</span>
-      <span>📣 Marketing</span>
-      <span>📝 Lead Capture</span>
-    </div>
-  </section>
-
-  <!-- ── Proof Bar ── -->
-  <section id="proof-bar">
-    <div class="proof-bar-inner">
-      <p class="proof-bar-label">Trusted by operators who actually do the work</p>
-      <div class="proof-bar-logos">
-        <div class="proof-bar-item">
-          <span class="proof-bar-icon">🍺</span>
-          <span class="proof-bar-name">Diamondback Brewing Co.</span>
-          <span class="proof-bar-tag">Live in production</span>
-        </div>
-        <div class="proof-bar-divider">·</div>
-        <div class="proof-bar-item">
-          <span class="proof-bar-stat">5 hrs</span>
-          <span class="proof-bar-stat-label">saved per week</span>
-        </div>
-        <div class="proof-bar-divider">·</div>
-        <div class="proof-bar-item">
-          <span class="proof-bar-stat">&lt;60s</span>
-          <span class="proof-bar-stat-label">response time</span>
-        </div>
-        <div class="proof-bar-divider">·</div>
-        <div class="proof-bar-item">
-          <span class="proof-bar-stat">0</span>
-          <span class="proof-bar-stat-label">missed inquiries</span>
-        </div>
+</section>
+  <!-- ── Social Proof Bar ── -->
+  <section id="social-proof">
+    <div class="social-proof-inner">
+      <div class="proof-stat">
+        <span class="proof-num">60+</span>
+        <span class="proof-label-sm">event requests/mo<br>automated</span>
+      </div>
+      <div class="proof-divider"></div>
+      <div class="proof-stat">
+        <span class="proof-num">5hrs</span>
+        <span class="proof-label-sm">saved every<br>week</span>
+      </div>
+      <div class="proof-divider"></div>
+      <div class="proof-stat">
+        <span class="proof-num">&lt;60s</span>
+        <span class="proof-label-sm">response time<br>(was 24–48h)</span>
+      </div>
+      <div class="proof-divider"></div>
+      <div class="proof-stat">
+        <span class="proof-num">0</span>
+        <span class="proof-label-sm">missed<br>inquiries</span>
       </div>
     </div>
   </section>
-
-  <!-- ── Social Proof Bar ── -->
-
 
   <!-- ── Pain Points ── -->
   <section id="pain">
