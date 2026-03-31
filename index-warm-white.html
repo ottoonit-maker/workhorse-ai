@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Workhorse AI — AI Automation for Small Businesses</title>
+  <meta name="description" content="Workhorse AI automates the grind so you can get back to running your business. Built by an operator, for operators in food &amp; beverage and trades." />
+  <style>
+    /* ─── Fonts ────────────────────────────────────────────────── */
+    @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,900;1,700&family=Barlow:wght@400;500;600;700&display=swap');
+
+    /* ─── Reset & Base ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:            #0f0d0b;
+      --bg-card:       #1a1714;
+      --bg-section:    #141210;
+      --border:        #2e2925;
+      --border-strong: #3d3730;
+      --accent:        #f0ece4;
+      --accent-dark:   #d4cfc7;
+      --text:          #f0ece4;
+      --muted:         #8a8076;
+      --light:         #ffffff;
+      --font-display:  'Barlow Condensed', 'Arial Narrow', Arial, sans-serif;
+      --font-sans:     'Barlow', 'Segoe UI', system-ui, -apple-system, sans-serif;
+      --font-serif:    Georgia, 'Times New Roman', serif;
+      --radius:        4px;
+      --max-w:         1100px;
+      --section-pad:   80px 24px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    img { display: block; max-width: 100%; }
+
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ─── Nav ──────────────────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(15,13,11,0.97);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+    }
+
+    .nav-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--light);
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .nav-cta {
+      background: var(--accent);
+      color: #0f0d0b;
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      border-radius: var(--radius);
+      white-space: nowrap;
+      transition: background 0.15s;
+    }
+
+    .nav-cta:hover {
+      background: var(--accent-dark);
+      text-decoration: none;
+      color: #0f0d0b;
+    }
+
+    /* ─── Hero ─────────────────────────────────────────────────── */
+    #hero {
+      padding: 96px 24px 80px;
+      text-align: center;
+      position: relative;
+      background-color: var(--bg);
+      background-image: radial-gradient(ellipse 80% 50% at 50% 0%, #2a1a04 0%, transparent 72%);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    /* Grain texture overlay */
+    #hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.038;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      color: var(--accent);
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding-left: 14px;
+      border-left: 3px solid var(--accent);
+      margin-bottom: 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    #hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3.4rem, 9vw, 6.4rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 0.95;
+      text-transform: uppercase;
+      color: var(--light);
+      max-width: 900px;
+      margin: 0 auto 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    #hero h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.15rem);
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto 44px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-form {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+      max-width: 480px;
+      margin: 0 auto 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-form input[type="email"] {
+      flex: 1 1 220px;
+      background: #1a1714;
+      border: 1px solid var(--border-strong);
+      color: var(--text);
+      font-size: 1rem;
+      font-family: var(--font-sans);
+      padding: 14px 18px;
+      border-radius: var(--radius);
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .hero-form input[type="email"]:focus {
+      border-color: var(--accent);
+    }
+
+    .hero-form input[type="email"]::placeholder {
+      color: #555;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0f0d0b;
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 14px 28px;
+      border-radius: var(--radius);
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-dark);
+    }
+
+    .hero-fine {
+      font-size: 0.8rem;
+      color: #555;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-logos {
+      margin-top: 56px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      opacity: 0.4;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-logos span {
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    /* ─── Section Headers ──────────────────────────────────────── */
+    .section-label {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+      padding-left: 14px;
+      border-left: 3px solid var(--accent);
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 900;
+      letter-spacing: -0.01em;
+      line-height: 1.0;
+      text-transform: uppercase;
+      color: var(--light);
+      margin-bottom: 18px;
+    }
+
+    .section-desc {
+      color: var(--muted);
+      max-width: 540px;
+      font-size: 1.05rem;
+    }
+
+    /* ─── Pain Points ──────────────────────────────────────────── */
+    #pain {
+      padding: var(--section-pad);
+      background: var(--bg-section);
+      border-bottom: 1px solid var(--border);
+    }
+
+    #pain .section-header {
+      margin-bottom: 56px;
+    }
+
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .pain-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-left: 3px solid #5a2a10;
+      border-radius: var(--radius);
+      padding: 32px;
+      position: relative;
+      box-shadow: 0 4px 28px rgba(0,0,0,0.45);
+    }
+
+    .pain-icon {
+      font-size: 1.8rem;
+      margin-bottom: 16px;
+      line-height: 1;
+    }
+
+    .pain-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+      color: var(--light);
+      margin-bottom: 10px;
+    }
+
+    .pain-card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* ─── What We Do ───────────────────────────────────────────── */
+    #solutions {
+      padding: var(--section-pad);
+      border-bottom: 1px solid var(--border);
+    }
+
+    #solutions .section-header {
+      margin-bottom: 56px;
+    }
+
+    .solutions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .solution-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-left: 3px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 36px 32px;
+      position: relative;
+      box-shadow: 0 4px 28px rgba(0,0,0,0.45);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .solution-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 6px 36px rgba(0,0,0,0.55);
+    }
+
+    .solution-number {
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+      opacity: 0.65;
+    }
+
+    .solution-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.55rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--light);
+      margin-bottom: 12px;
+      letter-spacing: 0.01em;
+    }
+
+    .solution-card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.65;
+    }
+
+    .solution-card ul {
+      list-style: none;
+      margin-top: 20px;
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+    }
+
+    .solution-card ul li {
+      font-size: 0.9rem;
+      color: var(--muted);
+      padding: 5px 0;
+      padding-left: 18px;
+      position: relative;
+    }
+
+    .solution-card ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 0.8rem;
+    }
+
+    /* ─── Social Proof ─────────────────────────────────────────── */
+    #proof {
+      padding: var(--section-pad);
+      background: var(--bg-section);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .proof-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    @media (max-width: 720px) {
+      .proof-inner { grid-template-columns: 1fr; gap: 36px; }
+    }
+
+    .proof-left blockquote {
+      font-size: clamp(1.1rem, 2.8vw, 1.45rem);
+      font-family: var(--font-serif);
+      font-style: italic;
+      color: var(--light);
+      line-height: 1.5;
+      margin-bottom: 28px;
+      padding-left: 24px;
+      border-left: 3px solid var(--accent);
+    }
+
+    .proof-left blockquote::before {
+      content: none;
+    }
+
+    .proof-attribution {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .proof-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, #2a1a06, #4a3010);
+      border: 1px solid var(--border-strong);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+
+    .proof-name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.05rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--light);
+    }
+
+    .proof-title {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .case-study-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-left: 3px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: 0 4px 28px rgba(0,0,0,0.45);
+    }
+
+    .case-study-tag {
+      display: inline-block;
+      color: var(--accent);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding-left: 12px;
+      border-left: 3px solid var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .case-study-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--light);
+      margin-bottom: 12px;
+    }
+
+    .case-study-card p {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 24px;
+    }
+
+    .stats-row {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      flex: 1;
+      min-width: 80px;
+    }
+
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--accent);
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .coming-soon-badge {
+      display: inline-block;
+      background: #1a1714;
+      border: 1px solid var(--border-strong);
+      color: #666;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: var(--radius);
+      margin-top: 24px;
+    }
+
+    /* ─── Waitlist Form ────────────────────────────────────────── */
+    #waitlist {
+      padding: var(--section-pad);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .waitlist-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    @media (max-width: 720px) {
+      .waitlist-inner { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    .waitlist-left h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 900;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      color: var(--light);
+      margin-bottom: 16px;
+      line-height: 1.0;
+    }
+
+    .waitlist-left p {
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+
+    .perks {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .perks li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .perks li::before {
+      content: '✓';
+      width: 22px;
+      height: 22px;
+      background: rgba(232,93,4,0.08);
+      border: 1px solid rgba(232,93,4,0.3);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: var(--accent);
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: #1a1714;
+      border: 1px solid var(--border-strong);
+      color: var(--text);
+      font-size: 1rem;
+      font-family: var(--font-sans);
+      padding: 13px 16px;
+      border-radius: var(--radius);
+      outline: none;
+      transition: border-color 0.15s;
+      width: 100%;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--accent);
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: #555;
+    }
+
+    .form-group select option {
+      background: #1a1714;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 110px;
+    }
+
+    .form-submit {
+      margin-top: 4px;
+    }
+
+    .form-submit .btn-primary {
+      width: 100%;
+      font-size: 0.95rem;
+      padding: 16px;
+      letter-spacing: 0.08em;
+    }
+
+    .form-note {
+      font-size: 0.78rem;
+      color: #555;
+      text-align: center;
+    }
+
+    /* ─── Footer ───────────────────────────────────────────────── */
+    footer {
+      background: #0a0907;
+      border-top: 1px solid var(--border);
+      padding: 40px 24px;
+    }
+
+    .footer-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--light);
+    }
+
+    .footer-logo span { color: var(--accent); }
+
+    .footer-tagline {
+      font-size: 0.72rem;
+      color: #555;
+      margin-top: 4px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .footer-bottom {
+      max-width: var(--max-w);
+      margin: 24px auto 0;
+      padding-top: 24px;
+      border-top: 1px solid #1e1a16;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: #444;
+    }
+
+    .footer-domain {
+      font-size: 0.78rem;
+      color: #444;
+    }
+
+    /* ─── Responsive ───────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      :root { --section-pad: 56px 20px; }
+
+      #hero { padding: 64px 20px 60px; }
+
+      .hero-form { flex-direction: column; }
+      .hero-form input[type="email"] { flex: 1 1 auto; width: 100%; }
+      .hero-form .btn-primary { width: 100%; }
+
+      nav { padding: 0 16px; }
+    }
+
+    @media (max-width: 480px) {
+      .stats-row { gap: 16px; }
+
+      #hero h1 { line-height: 0.98; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Nav ── -->
+  <nav>
+    <div class="nav-inner">
+      <div class="logo">
+        WORKHORSE<span> AI</span>
+      </div>
+      <a href="#waitlist" class="nav-cta">Get Early Access</a>
+    </div>
+  </nav>
+
+  <!-- ── Hero ── -->
+  <section id="hero">
+    <div class="hero-eyebrow">Now Accepting Early Access</div>
+    <h1>We Do the<br><em>Heavy Lifting.</em><br>You Run Your Business.</h1>
+    <p class="hero-sub">AI automation built for restaurants, bars, breweries, and cafes — plain and simple, no tech degree required.</p>
+
+    <form class="hero-form" action="mailto:hello@theworkhorse.ai" method="get" enctype="text/plain">
+      <input type="email" name="email" placeholder="Enter your email address" required />
+      <button type="submit" class="btn-primary">Get Early Access →</button>
+    </form>
+    <p class="hero-fine">No credit card. No commitment. Just early access.</p>
+
+    <div class="hero-logos">
+      <span>🍺 Breweries</span>
+      <span>🍽️ Restaurants</span>
+      <span>🍸 Bars & Taprooms</span>
+      <span>☕ Cafes</span>
+    </div>
+  </section>
+
+  <!-- ── Pain Points ── -->
+  <section id="pain">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Sound familiar?</p>
+        <h2 class="section-title">You Didn't Open a Business<br>to Do This Stuff</h2>
+        <p class="section-desc">The admin, the orders, the spreadsheets — it adds up fast. Here's what's killing your time.</p>
+      </div>
+
+      <div class="pain-grid">
+        <div class="pain-card">
+          <div class="pain-icon">📋</div>
+          <h3>Manual Inventory Is a Full-Time Job</h3>
+          <p>You're counting kegs, tallying stock, and chasing down what's low — by hand. Every single week. Meanwhile, real work is piling up.</p>
+        </div>
+
+        <div class="pain-card">
+          <div class="pain-icon">📞</div>
+          <h3>Ordering Takes Hours You Don't Have</h3>
+          <p>Phone calls, emails, fax (still?), rep callbacks — coordinating orders across multiple vendors burns your mornings. Every order, every time.</p>
+        </div>
+
+        <div class="pain-card">
+          <div class="pain-icon">📣</div>
+          <h3>Marketing? You'll Get to It. Someday.</h3>
+          <p>The Instagram post that never happened, the email list you haven't touched, the event you never promoted. There's never enough time left over.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Solutions ── -->
+  <section id="solutions">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">What we do</p>
+        <h2 class="section-title">Put the Grind on Autopilot</h2>
+        <p class="section-desc">Workhorse AI handles the repetitive stuff so you and your team can focus on what you're actually good at. Built for food &amp; beverage — by someone who runs one.</p>
+      </div>
+
+      <div class="solutions-grid">
+        <div class="solution-card">
+          <div class="solution-number">01</div>
+          <h3>Automate the Grind</h3>
+          <p>We take the most time-consuming, repetitive tasks off your plate entirely — and keep them off.</p>
+          <ul>
+            <li>Inventory tracking &amp; alerts</li>
+            <li>Automated order triggers</li>
+            <li>Intake forms that actually work</li>
+          </ul>
+        </div>
+
+        <div class="solution-card">
+          <div class="solution-number">02</div>
+          <h3>Free Up Your Team</h3>
+          <p>Your people are better than data entry. Give them back the hours they spend on admin and put them where they actually make a difference.</p>
+          <ul>
+            <li>Staff scheduling assistance</li>
+            <li>Customer communication automation</li>
+            <li>Event &amp; booking workflows</li>
+          </ul>
+        </div>
+
+        <div class="solution-card">
+          <div class="solution-number">03</div>
+          <h3>Run Leaner, Not Harder</h3>
+          <p>Real-time visibility into your costs, your stock, and your margins — without building a spreadsheet empire to get there.</p>
+          <ul>
+            <li>Food &amp; pour cost tracking</li>
+            <li>Vendor spend summaries</li>
+            <li>Simple dashboards, no fluff</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Social Proof ── -->
+  <section id="proof">
+    <div class="container">
+      <div class="proof-inner">
+        <div class="proof-left">
+          <p class="section-label">Our story</p>
+          <blockquote>
+            I built this because I needed it. Running a brewery, I was drowning in the same admin garbage every week. These tools saved me real hours — so I made them available to everyone running a place like mine.
+          </blockquote>
+          <div class="proof-attribution">
+            <div class="proof-avatar">🍺</div>
+            <div>
+              <div class="proof-name">Tom F.</div>
+              <div class="proof-title">Founder, Workhorse AI — Owner, Diamondback Brewing Co.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="proof-right">
+          <div class="case-study-card">
+            <div class="case-study-tag">Case Study — Coming Soon</div>
+            <h3>From the Brewery Floor:<br>Real Results, Real Business</h3>
+            <p>We ran every tool we build inside our own brewery first. Here's what happened when we automated event intake, inventory alerts, and weekly ordering.</p>
+
+            <div class="stats-row">
+              <div class="stat">
+                <div class="stat-number">6+</div>
+                <div class="stat-label">Hours saved<br>per week</div>
+              </div>
+              <div class="stat">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Missed event<br>requests</div>
+              </div>
+              <div class="stat">
+                <div class="stat-number">Live</div>
+                <div class="stat-label">Running in<br>production</div>
+              </div>
+            </div>
+
+            <div class="coming-soon-badge">Full case study dropping at launch</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Waitlist / Contact ── -->
+  <section id="waitlist">
+    <div class="container">
+      <div class="waitlist-inner">
+        <div class="waitlist-left">
+          <p class="section-label">Join the waitlist</p>
+          <h2>Be First When<br>We Open the Doors</h2>
+          <p>We're working with a small group of early customers to dial everything in. Spots are limited. Get on the list now and we'll reach out directly.</p>
+
+          <ul class="perks">
+            <li>Early access pricing — locked in for life</li>
+            <li>Direct line to the founder</li>
+            <li>Input on features we build next</li>
+            <li>No sales calls, no nonsense</li>
+          </ul>
+        </div>
+
+        <div class="waitlist-right">
+          <form class="contact-form" action="mailto:hello@theworkhorse.ai" method="get" enctype="text/plain">
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" name="name" placeholder="First and last name" required />
+            </div>
+
+            <div class="form-group">
+              <label for="email2">Email Address</label>
+              <input type="email" id="email2" name="email" placeholder="you@yourbusiness.com" required />
+            </div>
+
+            <div class="form-group">
+              <label for="biztype">Type of Business</label>
+              <select id="biztype" name="business_type">
+                <option value="" disabled selected>Select your business type</option>
+                <option value="brewery">Brewery</option>
+                <option value="restaurant">Restaurant</option>
+                <option value="bar">Bar / Taproom</option>
+                <option value="food-truck">Food Truck</option>
+                <option value="cafe">Cafe / Coffee Shop</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="biggestpain">Biggest Headache Right Now</label>
+              <textarea id="biggestpain" name="biggest_pain" placeholder="Tell us what's eating up the most time..."></textarea>
+            </div>
+
+            <div class="form-submit">
+              <button type="submit" class="btn-primary">Get My Spot on the Waitlist →</button>
+            </div>
+            <p class="form-note">We'll reach out personally. No spam, ever.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo" style="display:flex;align-items:center;gap:10px;">
+          WORKHORSE<span> AI</span>
+        </div>
+        <div class="footer-tagline">We do the heavy lifting.</div>
+      </div>
+      <div class="footer-links">
+        <a href="#hero">Home</a>
+        <a href="#pain">Why Workhorse</a>
+        <a href="#solutions">What We Do</a>
+        <a href="#waitlist">Get Early Access</a>
+        <a href="mailto:hello@theworkhorse.ai">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Workhorse AI. All rights reserved.</div>
+      <div class="footer-domain">theworkhorse.ai</div>
+    </div>
+  </footer>
+
+</body>
+</html>
