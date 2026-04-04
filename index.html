@@ -221,7 +221,8 @@
       color: var(--muted-light);
     }
 
-    .hero-form .btn-hero {
+    .hero-form .btn-hero,
+    a.btn-hero {
       background: var(--accent);
       color: var(--text);
       font-family: var(--font-sans);
@@ -233,9 +234,12 @@
       cursor: pointer;
       white-space: nowrap;
       transition: opacity 0.2s ease;
+      text-decoration: none;
+      display: inline-block;
     }
 
-    .hero-form .btn-hero:hover {
+    .hero-form .btn-hero:hover,
+    a.btn-hero:hover {
       opacity: 0.85;
     }
 
