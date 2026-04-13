@@ -3,26 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Workhorse AI — AI Automation for Small Businesses</title>
-  <meta name="description" content="Workhorse AI automates the grind so you can get back to running your business. Built by an operator, for operators in food &amp; beverage and trades." />
+  <title>Workhorse AI — AI Automation for Restaurants & Breweries</title>
+  <meta name="description" content="Workhorse AI automates the grind so you can get back to running your business. Built by a brewery owner, for F&B operators." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap');
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
       --bg:           #080808;
       --bg-card:      #111111;
       --bg-card-alt:  #141414;
+      --bg-elevated:  #161616;
       --border:       #222222;
       --border-light: #1e1e1e;
       --accent:       #b5341c;
       --accent-glow:  rgba(181, 52, 28, 0.15);
+      --accent-light: #e87a5a;
+      --brass:        #8b6914;
       --text:         #ffffff;
       --muted:        #c4beb8;
       --muted-light:  #a09890;
-      --font-display: 'Playfair Display', Georgia, serif;
+      --success:      #22c55e;
+      --warning:      #f59e0b;
       --font-sans:    'Montserrat', 'Inter', system-ui, sans-serif;
+      --font-body:    'Inter', 'Montserrat', system-ui, sans-serif;
     }
 
     html { scroll-behavior: smooth; }
@@ -32,18 +38,38 @@
       color: var(--text);
       font-family: var(--font-sans);
       font-size: 16px;
-      line-height: 1.65;
+      line-height: 1.7;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Noise texture overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
     }
 
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
-    em {
-      font-family: var(--font-sans);
-      font-style: italic;
-      color: var(--accent);
+    /* ─── Scroll Animations ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
     }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-in.delay-1 { transition-delay: 80ms; }
+    .fade-in.delay-2 { transition-delay: 160ms; }
+    .fade-in.delay-3 { transition-delay: 240ms; }
+    .fade-in.delay-4 { transition-delay: 320ms; }
 
     /* ─── Nav ── */
     nav {
@@ -55,38 +81,32 @@
       background: rgba(8,8,8,0.7);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      transition: background 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease;
+      transition: background 0.3s ease, border-color 0.3s ease;
       border-bottom: 1px solid rgba(255,255,255,0.06);
       padding: 0 24px;
     }
-
     nav.scrolled {
-      background: rgba(8, 8, 8, 0.9);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background: rgba(8, 8, 8, 0.92);
       border-bottom-color: var(--border-light);
     }
-
     .nav-inner {
       max-width: 1100px;
       margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 60px;
+      height: 64px;
     }
-
     .logo {
       display: flex;
       align-items: center;
       gap: 10px;
-      font-family: var(--font-sans);
       font-size: 0.9375rem;
       font-weight: 800;
       letter-spacing: 0.05em;
       color: var(--text);
+      z-index: 102;
     }
-
     .logo .ai { color: var(--accent); }
 
     .nav-links {
@@ -94,39 +114,87 @@
       align-items: center;
       gap: 28px;
     }
-
     .nav-links a {
-      font-family: var(--font-sans);
       font-size: 0.8125rem;
       font-weight: 500;
       color: var(--muted);
       text-decoration: none;
       transition: color 0.2s ease;
     }
-
-    .nav-links a:hover {
-      color: var(--text);
-      text-decoration: none;
-    }
+    .nav-links a:hover { color: var(--text); text-decoration: none; }
 
     .nav-cta {
-      background: var(--accent) !important;
-      color: var(--text) !important;
-      font-weight: 600 !important;
-      font-size: 0.8125rem !important;
-      padding: 8px 16px !important;
-      border-radius: 4px !important;
-      transition: opacity 0.2s ease !important;
+      background: var(--accent);
+      color: var(--text);
+      font-weight: 600;
+      font-size: 0.8125rem;
+      padding: 8px 16px;
+      border-radius: 4px;
+      transition: opacity 0.2s ease;
     }
+    .nav-links .nav-cta:hover { opacity: 0.85; color: var(--text); }
 
-    .nav-cta:hover {
-      opacity: 0.85;
-      color: var(--text) !important;
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      z-index: 102;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+      margin: 5px 0;
+      transition: all 0.3s ease;
+      border-radius: 1px;
+    }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    /* Mobile Nav Overlay */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(8,8,8,0.97);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      z-index: 101;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .mobile-nav.open { display: flex; opacity: 1; }
+    .mobile-nav a {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      padding: 12px 24px;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      transition: color 0.2s ease;
+    }
+    .mobile-nav a:hover { color: var(--accent); text-decoration: none; }
+    .mobile-nav .mobile-cta {
+      background: var(--accent);
+      border-radius: 6px;
+      padding: 14px 28px;
+      margin-top: 16px;
     }
 
     /* ─── Hero ── */
     #hero {
-      padding: 140px 24px 100px;
+      padding: 160px 24px 100px;
       text-align: center;
       background-color: #080808;
       background-image:
@@ -136,24 +204,13 @@
       position: relative;
       overflow: hidden;
     }
-
-    #hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 0;
-    }
-
     #hero > * { position: relative; z-index: 1; }
 
     .hero-eyebrow {
       display: inline-block;
       background: rgba(181,52,28,0.18);
       border: 1px solid rgba(181,52,28,0.5);
-      color: #e87a5a;
-      font-family: var(--font-sans);
+      color: var(--accent-light);
       font-size: 0.75rem;
       font-weight: 700;
       letter-spacing: 0.1em;
@@ -164,87 +221,72 @@
     }
 
     #hero h1 {
-      font-family: var(--font-sans);
-      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-size: clamp(2.75rem, 7vw, 5rem);
       font-weight: 800;
       line-height: 1.05;
       color: var(--text);
       max-width: 860px;
       margin: 0 auto 24px;
       letter-spacing: -0.02em;
-      text-shadow: 0 0 60px rgba(255,255,255,0.08);
     }
-
     #hero h1 em {
-      font-family: var(--font-sans);
       font-style: italic;
       color: var(--accent);
     }
 
     .hero-sub {
-      font-family: var(--font-sans);
-      font-size: 1.125rem;
+      font-family: var(--font-body);
+      font-size: 1.0625rem;
       font-weight: 400;
       color: var(--muted);
-      max-width: 500px;
+      max-width: 560px;
       margin: 0 auto 44px;
       line-height: 1.7;
     }
 
-    .hero-form {
+    .hero-buttons {
       display: flex;
-      gap: 8px;
+      gap: 12px;
       justify-content: center;
       flex-wrap: wrap;
-      max-width: 440px;
-      margin: 0 auto 14px;
+      margin-bottom: 14px;
     }
-
-    .hero-form input[type="email"] {
-      flex: 1 1 200px;
-      background: #111111;
-      border: 1px solid #333333;
-      color: var(--text);
-      font-size: 0.9375rem;
-      font-family: var(--font-sans);
-      padding: 13px 16px;
-      border-radius: 4px;
-      outline: none;
-      transition: border-color 0.2s ease;
-    }
-
-    .hero-form input[type="email"]:focus {
-      border-color: var(--accent);
-    }
-
-    .hero-form input[type="email"]::placeholder {
-      color: var(--muted-light);
-    }
-
-    .hero-form .btn-hero,
-    a.btn-hero {
+    .btn-primary {
       background: var(--accent);
       color: var(--text);
       font-family: var(--font-sans);
       font-weight: 700;
-      font-size: 0.875rem;
-      padding: 13px 22px;
-      border-radius: 4px;
+      font-size: 0.9375rem;
+      padding: 14px 28px;
+      border-radius: 6px;
       border: none;
       cursor: pointer;
-      white-space: nowrap;
-      transition: opacity 0.2s ease;
       text-decoration: none;
       display: inline-block;
+      transition: opacity 0.2s ease;
     }
-
-    .hero-form .btn-hero:hover,
-    a.btn-hero:hover {
-      opacity: 0.85;
+    .btn-primary:hover { opacity: 0.85; text-decoration: none; }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-weight: 600;
+      font-size: 0.9375rem;
+      padding: 14px 28px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.15);
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.2s ease;
+    }
+    .btn-ghost:hover {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.25);
+      text-decoration: none;
     }
 
     .hero-fine {
-      font-family: var(--font-sans);
       font-size: 0.8125rem;
       color: var(--muted-light);
       margin-bottom: 52px;
@@ -253,16 +295,17 @@
     .hero-tags {
       display: flex;
       justify-content: center;
-      align-items: center;
-      gap: 32px;
+      gap: 12px;
       flex-wrap: wrap;
     }
-
-    .hero-tags span {
-      font-family: var(--font-sans);
+    .hero-tag {
       font-size: 0.8125rem;
-      font-weight: 400;
+      font-weight: 500;
       color: var(--muted-light);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 6px 14px;
+      border-radius: 20px;
     }
 
     /* ─── Social Proof Bar ── */
@@ -277,24 +320,17 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0;
     }
-    .proof-stat {
-      flex: 1;
-      text-align: center;
-      padding: 0 24px;
-    }
+    .proof-stat { flex: 1; text-align: center; padding: 0 24px; }
     .proof-num {
       display: block;
-      font-family: var(--font-sans);
       font-size: clamp(2.2rem, 5vw, 3rem);
-      font-weight: 800;
+      font-weight: 900;
       color: var(--text);
       line-height: 1;
       margin-bottom: 8px;
     }
     .proof-label-sm {
-      font-family: var(--font-sans);
       font-size: 0.78rem;
       font-weight: 500;
       color: var(--muted);
@@ -312,19 +348,11 @@
       font-size: 0.78rem;
       color: var(--muted);
     }
-    .proof-attribution strong {
-      color: var(--text);
-    }
-    @media (max-width: 600px) {
-      .social-proof-inner { flex-wrap: wrap; gap: 24px; }
-      .proof-divider { display: none; }
-      .proof-stat { flex: 0 0 45%; }
-    }
+    .proof-attribution strong { color: var(--text); }
 
-    /* ─── Section shared ── */
+    /* ─── Section Shared ── */
     .section-label {
       display: block;
-      font-family: var(--font-sans);
       font-size: 0.8rem;
       font-weight: 700;
       letter-spacing: 0.12em;
@@ -333,9 +361,7 @@
       margin-bottom: 16px;
       text-align: center;
     }
-
     .section-title {
-      font-family: var(--font-sans);
       font-size: clamp(2rem, 4vw, 2.5rem);
       font-weight: 800;
       color: var(--text);
@@ -344,16 +370,9 @@
       text-align: center;
       margin-bottom: 16px;
     }
-
-    .section-title em {
-      font-family: var(--font-sans);
-      font-style: italic;
-      color: var(--accent);
-      font-weight: 700;
-    }
-
+    .section-title em { font-style: italic; color: var(--accent); font-weight: 700; }
     .section-desc {
-      font-family: var(--font-sans);
+      font-family: var(--font-body);
       font-size: 1.0625rem;
       color: var(--muted);
       max-width: 540px;
@@ -361,188 +380,329 @@
       line-height: 1.7;
       text-align: center;
     }
-
-    .section-header {
-      margin-bottom: 64px;
-    }
+    .section-header { margin-bottom: 64px; }
 
     /* ─── Pain Points ── */
     #pain {
-      padding: 80px 24px;
+      padding: 96px 24px;
       background: linear-gradient(180deg, #080808 0%, #0a0a0a 50%, #080808 100%);
     }
-
     .pain-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 20px;
       max-width: 1100px;
       margin: 0 auto;
     }
-
     .pain-card {
       background: linear-gradient(145deg, #161210 0%, #0f0d0b 100%);
-      border: 1px solid rgba(181,52,28,0.15);
-      border-top: 2px solid rgba(181,52,28,0.4);
+      border: 1px solid rgba(181,52,28,0.12);
+      border-left: 3px solid rgba(181,52,28,0.4);
       border-radius: 8px;
-      padding: 36px 32px;
+      padding: 32px 28px;
       transition: all 0.25s ease;
-      position: relative;
     }
-
     .pain-card:hover {
-      border-color: rgba(181,52,28,0.35);
-      border-top-color: rgba(181,52,28,0.7);
-      box-shadow: 0 8px 32px rgba(181,52,28,0.08), 0 2px 8px rgba(0,0,0,0.4);
+      border-left-color: rgba(181,52,28,0.7);
+      box-shadow: 0 8px 32px rgba(181,52,28,0.06), 0 2px 8px rgba(0,0,0,0.4);
       transform: translateY(-3px);
     }
-
     .pain-icon {
-      font-size: 2.2rem;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(181,52,28,0.12);
+      border-radius: 8px;
       margin-bottom: 20px;
-      line-height: 1;
-      display: block;
+      color: var(--accent);
+      font-size: 1.1rem;
     }
-
     .pain-card h3 {
-      font-family: var(--font-sans);
-      font-size: 1.0625rem;
+      font-size: 1rem;
       font-weight: 700;
       color: var(--text);
-      margin-bottom: 10px;
-      line-height: 1.3;
+      margin-bottom: 16px;
+      line-height: 1.4;
     }
+    .pain-link {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .pain-link:hover { opacity: 0.8; text-decoration: none; }
 
-    .pain-card p {
+    /* ─── Automations Showcase ── */
+    #automations {
+      padding: 96px 24px;
+    }
+    .auto-tabs {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .auto-tab-bar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 32px;
+    }
+    .auto-tab-bar label {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      background: transparent;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .auto-tab-bar label:hover {
+      border-color: rgba(255,255,255,0.15);
+      color: var(--text);
+    }
+    .auto-tab-radio { display: none; }
+    .auto-tab-radio:checked + label {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--text);
+    }
+    .auto-panels { position: relative; }
+    .auto-panel {
+      display: none;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 40px;
+      animation: panelFadeIn 0.3s ease;
+    }
+    @keyframes panelFadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .auto-panel.active { display: block; }
+    .auto-panel-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .auto-panel-header h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .status-badge.live { color: var(--success); }
+    .status-badge.coming { color: var(--warning); }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .status-badge.live .status-dot { background: var(--success); }
+    .status-badge.coming .status-dot { background: var(--warning); }
+
+    .auto-compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 28px;
+    }
+    .auto-before, .auto-after { font-family: var(--font-body); }
+    .auto-before h4, .auto-after h4 {
       font-family: var(--font-sans);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+    .auto-before h4 { color: var(--muted-light); }
+    .auto-after h4 { color: var(--accent); }
+    .auto-before p, .auto-after p {
       font-size: 0.875rem;
       color: var(--muted);
       line-height: 1.7;
     }
-
-    /* ─── Social Proof / Quote ── */
-    #proof {
-      padding: 80px 24px;
-      background: linear-gradient(180deg, #080808 0%, #0a0a0a 100%);
-      text-align: center;
+    .auto-stat-row {
+      display: flex;
+      gap: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    .auto-stat { text-align: center; flex: 1; }
+    .auto-stat-num {
+      font-family: var(--font-sans);
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--accent);
+      line-height: 1;
+      display: block;
+    }
+    .auto-stat-label {
+      font-size: 0.75rem;
+      color: var(--muted-light);
+      margin-top: 4px;
+      display: block;
     }
 
+    /* ─── How It Works ── */
+    #how-it-works { padding: 96px 24px; }
+    .steps-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 0;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .step { flex: 1; text-align: center; padding: 0 24px; }
+    .step-number {
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .step h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; }
+    .step p {
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .step-timeline {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--muted-light);
+      margin-top: 12px;
+    }
+    .step-arrow {
+      color: var(--accent);
+      font-size: 1.5rem;
+      padding-top: 8px;
+      flex-shrink: 0;
+      opacity: 0.4;
+    }
+
+    /* ─── Our Story ── */
+    #proof {
+      padding: 96px 24px;
+      background: linear-gradient(180deg, #080808 0%, #0a0a0a 100%);
+    }
     .proof-quote-wrap {
       max-width: 700px;
       margin: 0 auto 24px;
-    }
-
-    .founder-photo-wrap {
-      margin-bottom: 28px;
+      text-align: center;
     }
     .founder-photo {
-      width: 180px;
-      height: 180px;
+      width: 160px;
+      height: 160px;
       border-radius: 50%;
       object-fit: cover;
       object-position: center 20%;
       border: 3px solid rgba(181,52,28,0.4);
       display: block;
-      margin: 0 auto;
+      margin: 0 auto 28px;
       filter: grayscale(20%);
+      transition: filter 0.4s ease;
     }
+    .founder-photo:hover { filter: grayscale(0%) brightness(1.05); }
+
     blockquote.founder-quote {
-      font-family: var(--font-sans);
       font-style: italic;
-      font-weight: 700;
-      font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+      font-weight: 600;
+      font-size: clamp(1.125rem, 2.5vw, 1.5rem);
       color: var(--text);
-      line-height: 1.5;
+      line-height: 1.6;
       text-align: center;
     }
-
-    .proof-attribution {
-      font-family: var(--font-sans);
+    .proof-attr {
       font-size: 0.875rem;
       font-weight: 500;
       color: var(--muted-light);
       margin-bottom: 56px;
+      text-align: center;
     }
 
-    .case-study-brewery-photo {
-      margin: -40px -36px 28px -36px;
-      border-radius: 8px 8px 0 0;
+    .case-study-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      max-width: 640px;
+      margin: 0 auto;
       overflow: hidden;
     }
-    .brewery-photo {
+    .case-study-photo {
       width: 100%;
-      height: 240px;
+      height: 220px;
       object-fit: cover;
       object-position: center 60%;
       display: block;
       filter: brightness(0.85);
+      transition: filter 0.4s ease;
     }
-    .case-study-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 40px 36px;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
+    .case-study-card:hover .case-study-photo { filter: brightness(0.95) saturate(1.1); }
+    .case-study-body { padding: 36px; }
     .case-study-tag {
-      display: inline-block;
-      font-family: var(--font-sans);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
       font-size: 0.6875rem;
       font-weight: 600;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 20px;
+      color: var(--success);
+      margin-bottom: 16px;
     }
-
-    .case-study-card h3 {
-      font-family: var(--font-sans);
-      font-size: 1.125rem;
+    .case-study-body h3 {
+      font-size: 1.25rem;
       font-weight: 700;
-      color: var(--text);
       margin-bottom: 16px;
       line-height: 1.3;
-      text-align: left;
     }
-
-    .case-study-card p {
-      font-family: var(--font-sans);
+    .case-study-body p {
+      font-family: var(--font-body);
       font-size: 0.875rem;
       color: var(--muted);
-      margin-bottom: 16px;
       line-height: 1.7;
+      margin-bottom: 12px;
       text-align: left;
     }
-
     .stats-row {
       display: flex;
       gap: 20px;
       flex-wrap: wrap;
-      padding-top: 28px;
+      padding-top: 24px;
       border-top: 1px solid var(--border);
       justify-content: center;
     }
-
-    .stat {
-      flex: 1;
-      min-width: 80px;
-      text-align: center;
-    }
-
+    .stat { flex: 1; min-width: 80px; text-align: center; }
     .stat-number {
-      font-family: var(--font-sans);
-      font-size: clamp(2.5rem, 5vw, 3rem);
+      font-size: clamp(2rem, 4vw, 2.5rem);
       font-weight: 900;
       color: var(--accent);
       letter-spacing: -0.02em;
       line-height: 1;
       display: block;
     }
-
     .stat-label {
-      font-family: var(--font-sans);
       font-size: 0.75rem;
       color: var(--muted-light);
       margin-top: 6px;
@@ -550,52 +710,72 @@
       display: block;
     }
 
-    .coming-soon-badge {
-      display: inline-block;
-      background: var(--bg-card-alt);
-      border: 1px solid var(--border);
+    /* ─── FAQ ── */
+    #faq { padding: 96px 24px; }
+    .faq-list {
+      text-align: left;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-item:first-child { border-top: 1px solid var(--border); }
+    .faq-q {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      padding: 20px 32px 20px 0;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+      text-align: left;
+    }
+    .faq-q::-webkit-details-marker { display: none; }
+    .faq-q::after {
+      content: '+';
+      font-size: 1.2rem;
+      color: var(--accent);
+      font-weight: 400;
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+    details[open] .faq-q::after { content: '\2212'; }
+    details[open] .faq-q { color: var(--accent); }
+    .faq-a {
+      font-family: var(--font-body);
+      font-size: 0.875rem;
       color: var(--muted);
-      font-family: var(--font-sans);
-      font-size: 0.6875rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 6px 12px;
-      border-radius: 4px;
-      margin-top: 24px;
+      line-height: 1.7;
+      padding: 0 0 20px 0;
+      text-align: left;
     }
 
     /* ─── Waitlist ── */
-    #waitlist {
-      padding: 80px 24px;
-      background: var(--bg);
-    }
-
+    #waitlist { padding: 96px 24px; }
     .waitlist-header {
       text-align: center;
       max-width: 860px;
       margin: 0 auto 56px;
     }
-
     .waitlist-header h2 {
-      font-family: var(--font-sans);
       font-size: clamp(2rem, 4vw, 2.5rem);
       font-weight: 800;
-      color: var(--text);
       letter-spacing: -0.02em;
       line-height: 1.1;
       margin-bottom: 16px;
     }
-
     .waitlist-header > p {
-      font-family: var(--font-sans);
+      font-family: var(--font-body);
       font-size: 1.0625rem;
       color: var(--muted);
       max-width: 520px;
       margin: 0 auto 32px;
       line-height: 1.7;
     }
-
     .perks {
       list-style: none;
       display: flex;
@@ -605,18 +785,15 @@
       max-width: 600px;
       margin: 0 auto;
     }
-
     .perks li {
       display: flex;
       align-items: center;
       gap: 10px;
-      font-family: var(--font-sans);
       font-size: 0.9375rem;
       color: var(--muted);
     }
-
     .perks li::before {
-      content: '✓';
+      content: '\2713';
       color: var(--accent);
       font-weight: 700;
       font-size: 0.875rem;
@@ -627,55 +804,46 @@
       max-width: 520px;
       margin: 0 auto;
     }
-
     .contact-form {
       display: flex;
       flex-direction: column;
       gap: 16px;
     }
-
     .form-group {
       display: flex;
       flex-direction: column;
       gap: 6px;
     }
-
     .form-group label {
-      font-family: var(--font-sans);
       font-size: 0.6875rem;
       font-weight: 600;
       color: var(--muted-light);
       letter-spacing: 0.1em;
       text-transform: uppercase;
     }
-
     .form-group input,
     .form-group select,
     .form-group textarea {
-      background: #111111;
+      background: var(--bg-card);
       border: 1px solid #333333;
       color: var(--text);
       font-size: 0.9375rem;
-      font-family: var(--font-sans);
+      font-family: var(--font-body);
       padding: 12px 14px;
       border-radius: 6px;
       outline: none;
-      transition: border-color 0.2s ease;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
       width: 100%;
       -webkit-appearance: none;
     }
-
     .form-group input:focus,
     .form-group select:focus,
     .form-group textarea:focus {
       border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
     }
-
     .form-group input::placeholder,
-    .form-group textarea::placeholder {
-      color: var(--muted-light);
-    }
-
+    .form-group textarea::placeholder { color: var(--muted-light); }
     .form-group select {
       cursor: pointer;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23555555' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
@@ -683,16 +851,8 @@
       background-position: right 14px center;
       padding-right: 36px;
     }
-
-    .form-group select option {
-      background: #111111;
-      color: var(--text);
-    }
-
-    .form-group textarea {
-      resize: vertical;
-      min-height: 110px;
-    }
+    .form-group select option { background: var(--bg-card); color: var(--text); }
+    .form-group textarea { resize: vertical; min-height: 100px; }
 
     .btn-submit {
       width: 100%;
@@ -706,20 +866,20 @@
       border: none;
       cursor: pointer;
       transition: opacity 0.2s ease;
-      letter-spacing: 0.01em;
       margin-top: 4px;
     }
-
-    .btn-submit:hover {
-      opacity: 0.85;
-    }
-
+    .btn-submit:hover { opacity: 0.85; }
     .form-note {
-      font-family: var(--font-sans);
       font-size: 0.8rem;
       color: var(--muted-light);
       text-align: center;
       margin-top: 8px;
+    }
+    .form-social-proof {
+      font-size: 0.78rem;
+      color: var(--muted-light);
+      text-align: center;
+      margin-top: 4px;
     }
 
     #form-success {
@@ -729,24 +889,18 @@
       border: 1px solid var(--border);
       border-radius: 8px;
     }
-
     #form-success .success-icon {
       font-size: 1.5rem;
-      color: var(--text);
+      color: var(--success);
       font-weight: 700;
       margin-bottom: 16px;
     }
-
     #form-success h3 {
-      font-family: var(--font-sans);
       font-size: 1.375rem;
       font-weight: 800;
-      color: var(--text);
       margin-bottom: 10px;
     }
-
     #form-success p {
-      font-family: var(--font-sans);
       font-size: 0.9375rem;
       color: var(--muted);
     }
@@ -758,29 +912,23 @@
       text-align: center;
       border-top: 1px solid var(--border-light);
     }
-
     .footer-logo {
-      font-family: var(--font-sans);
       font-size: 0.9375rem;
       font-weight: 800;
       letter-spacing: 0.05em;
       color: var(--text);
-      margin-bottom: 10px;
+      margin-bottom: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
     }
-
     .footer-logo .ai { color: var(--accent); }
-
     .footer-tagline {
-      font-family: var(--font-sans);
       font-size: 0.8125rem;
       color: #444444;
       margin-bottom: 28px;
     }
-
     .footer-links {
       display: flex;
       justify-content: center;
@@ -788,166 +936,47 @@
       flex-wrap: wrap;
       margin-bottom: 32px;
     }
-
     .footer-links a {
-      font-family: var(--font-sans);
       font-size: 0.8125rem;
       font-weight: 400;
       color: var(--muted-light);
       text-decoration: none;
       transition: color 0.2s ease;
     }
-
-    .footer-links a:hover {
-      color: var(--text);
-      text-decoration: none;
-    }
-
+    .footer-links a:hover { color: var(--text); text-decoration: none; }
     .footer-copy {
-      font-family: var(--font-sans);
       font-size: 0.75rem;
       color: #333333;
     }
 
     /* ─── Responsive ── */
     @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-      }
-
-      #hero {
-        padding: 100px 20px 80px;
-      }
-
-      .proof-stat-row {
-        gap: 36px;
-      }
-
-      .stats-row {
-        gap: 16px;
-      }
-
-      .case-study-card {
-        padding: 28px 24px;
-      }
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+      #hero { padding: 120px 20px 80px; }
+      .steps-row { flex-direction: column; align-items: center; gap: 32px; }
+      .step-arrow { transform: rotate(90deg); padding: 0; }
+      .case-study-body { padding: 28px 24px; }
+      .auto-compare { grid-template-columns: 1fr; gap: 24px; }
+      .auto-panel { padding: 28px 24px; }
+      .auto-stat-row { flex-wrap: wrap; gap: 20px; }
+      .auto-stat { flex: 0 0 calc(50% - 10px); }
     }
-
     @media (max-width: 600px) {
-      #hero { padding: 100px 20px 72px; }
-
-      #hero h1 { font-size: clamp(2.5rem, 10vw, 3.5rem); }
-
-      .hero-form { flex-direction: column; }
-      .hero-form input[type="email"],
-      .hero-form .btn-hero { width: 100%; flex: 1 1 auto; }
-
-      .hero-tags { gap: 16px; }
-
-      #pain, #proof, #waitlist { padding: 80px 20px; }
-
+      #hero h1 { font-size: clamp(2.25rem, 10vw, 3rem); }
+      .hero-buttons { flex-direction: column; align-items: center; }
+      .btn-primary, .btn-ghost { width: 100%; text-align: center; }
+      .hero-tags { gap: 8px; }
+      .hero-tag { font-size: 0.75rem; padding: 5px 12px; }
+      .social-proof-inner { flex-wrap: wrap; gap: 24px; }
+      .proof-divider { display: none; }
+      .proof-stat { flex: 0 0 45%; }
+      #pain, #automations, #how-it-works, #proof, #faq, #waitlist { padding: 80px 20px; }
       .pain-grid { grid-template-columns: 1fr; }
-
+      .auto-tab-bar label { font-size: 0.75rem; padding: 8px 14px; }
       .perks { flex-direction: column; align-items: center; }
+      .stats-row { gap: 16px; }
     }
-
-  #how-it-works {
-    padding: 80px 24px;
-  }
-  .steps-row {
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 0;
-    max-width: 900px;
-    margin: 0 auto;
-  }
-  .step {
-    flex: 1;
-    text-align: center;
-    padding: 0 20px;
-  }
-  .step-number {
-    font-family: var(--font-sans);
-    font-size: 0.75rem;
-    font-weight: 800;
-    letter-spacing: 0.1em;
-    color: var(--accent);
-    margin-bottom: 16px;
-  }
-  .step h3 {
-    font-family: var(--font-sans);
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 10px;
-  }
-  .step p {
-    font-size: 0.88rem;
-    color: var(--muted);
-    line-height: 1.65;
-  }
-  .step-arrow {
-    color: var(--accent);
-    font-size: 1.5rem;
-    padding-top: 8px;
-    flex-shrink: 0;
-    opacity: 0.5;
-  }
-  @media (max-width: 700px) {
-    .steps-row { flex-direction: column; align-items: center; gap: 32px; }
-    .step-arrow { transform: rotate(90deg); padding: 0; }
-  }
-
-  #faq {
-    padding: 80px 24px;
-    text-align: center;
-  }
-  #faq .faq-list {
-    text-align: left;
-    max-width: 720px;
-    margin: 0 auto;
-    display: block;
-  }
-  .faq-item {
-    padding: 0;
-    border-bottom: 1px solid var(--border);
-  }
-  .faq-item:first-child {
-    border-top: 1px solid var(--border);
-  }
-  .faq-q {
-    font-family: var(--font-sans);
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--text);
-    padding: 18px 32px 18px 0;
-    cursor: pointer;
-    list-style: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    user-select: none;
-    text-align: left;
-  }
-  .faq-q::-webkit-details-marker { display: none; }
-  .faq-q::after {
-    content: '+';
-    font-size: 1.2rem;
-    color: var(--accent);
-    font-weight: 400;
-    flex-shrink: 0;
-    transition: transform 0.2s;
-  }
-  details[open] .faq-q::after {
-    content: '−';
-  }
-  .faq-a {
-    font-size: 0.88rem;
-    color: var(--muted);
-    line-height: 1.7;
-    padding: 0 0 18px 0;
-    text-align: left;
-  }
   </style>
 </head>
 <body>
@@ -958,211 +987,362 @@
       <div class="logo">WORKHORSE<span class="ai"> AI</span></div>
       <div class="nav-links">
         <a href="#pain">Why Workhorse</a>
+        <a href="#automations">What We Build</a>
         <a href="#how-it-works">How It Works</a>
         <a href="#proof">Our Story</a>
         <a href="#faq">FAQ</a>
         <a href="#waitlist" class="nav-cta">Book a Free Audit</a>
       </div>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
 
-  <script>
-    (function() {
-      var nav = document.getElementById('main-nav');
-      window.addEventListener('scroll', function() {
-        if (window.scrollY > 20) {
-          nav.classList.add('scrolled');
-        } else {
-          nav.classList.remove('scrolled');
-        }
-      }, { passive: true });
-    })();
-  </script>
+  <!-- Mobile Nav Overlay -->
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="#pain">Why Workhorse</a>
+    <a href="#automations">What We Build</a>
+    <a href="#how-it-works">How It Works</a>
+    <a href="#proof">Our Story</a>
+    <a href="#faq">FAQ</a>
+    <a href="#waitlist" class="mobile-cta">Book a Free Audit</a>
+  </div>
 
   <!-- ── Hero ── -->
   <section id="hero">
-    <div class="hero-eyebrow">Now Taking Clients</div>
-    <h1>We Do the <em>Heavy</em> Lifting.<br>You Run Your Business.</h1>
-    <p class="hero-sub">We automate the manual stuff killing your margins — event intake, inventory tracking, ordering, and marketing. Built by an operator, for operators.</p>
+    <div class="hero-eyebrow fade-in">Saving Operators 30+ Hours/Month</div>
+    <h1 class="fade-in delay-1">We Do the <em>Heavy</em> Lifting.<br>You Run Your Business.</h1>
+    <p class="hero-sub fade-in delay-2">We build custom automations for restaurants and breweries &mdash; event intake, inventory, production, reporting, whatever's eating your hours. Built by an operator, for operators.</p>
 
-    <a href="#waitlist" class="btn-hero">Book a Free Audit →</a>
-    <p class="hero-fine">Free audit. No credit card. No commitment.</p>
-
-    <div class="hero-tags">
-      <span>🍺 Breweries</span>
-      <span>🍽️ Restaurants</span>
-      <span>🍸 Bars & Taprooms</span>
-      <span>☕ Cafes</span>
+    <div class="hero-buttons fade-in delay-3">
+      <a href="#waitlist" class="btn-primary">Book a Free Audit &rarr;</a>
+      <a href="#automations" class="btn-ghost">See What We've Built</a>
     </div>
-</section>
+    <p class="hero-fine fade-in delay-3">Free 30-minute call. No commitment. No pitch.</p>
+
+    <div class="hero-tags fade-in delay-4">
+      <span class="hero-tag">Breweries</span>
+      <span class="hero-tag">Restaurants</span>
+      <span class="hero-tag">Bars &amp; Taprooms</span>
+      <span class="hero-tag">Cafes</span>
+    </div>
+  </section>
 
   <!-- ── Social Proof Bar ── -->
   <section id="social-proof">
     <div class="social-proof-inner">
       <div class="proof-stat">
-        <span class="proof-num">60+</span>
-        <span class="proof-label-sm">event requests/mo<br>automated</span>
-      </div>
-      <div class="proof-divider"></div>
-      <div class="proof-stat">
-        <span class="proof-num">5hrs</span>
-        <span class="proof-label-sm">saved every<br>week</span>
-      </div>
-      <div class="proof-divider"></div>
-      <div class="proof-stat">
-        <span class="proof-num">&lt;60s</span>
-        <span class="proof-label-sm">response time<br>(was 24–48h)</span>
+        <span class="proof-num">30+</span>
+        <span class="proof-label-sm">hours saved<br>every month</span>
       </div>
       <div class="proof-divider"></div>
       <div class="proof-stat">
         <span class="proof-num">0</span>
         <span class="proof-label-sm">missed<br>inquiries</span>
       </div>
+      <div class="proof-divider"></div>
+      <div class="proof-stat">
+        <span class="proof-num">&lt;60s</span>
+        <span class="proof-label-sm">response time<br>(was 24&ndash;48h)</span>
+      </div>
+      <div class="proof-divider"></div>
+      <div class="proof-stat">
+        <span class="proof-num">$0</span>
+        <span class="proof-label-sm">additional<br>staff needed</span>
+      </div>
     </div>
-    <p class="proof-attribution">🍺 Real results from <strong>Diamondback Brewing Co.</strong> — live in production</p>
+    <p class="proof-attribution">Real results from <strong>Diamondback Brewing Co.</strong> &mdash; live in production</p>
   </section>
 
   <!-- ── Pain Points ── -->
   <section id="pain">
-    <div class="section-header">
+    <div class="section-header fade-in">
       <span class="section-label">Sound familiar?</span>
       <h2 class="section-title">You Didn't Open a Business<br>to Do This <em>Stuff</em></h2>
-      <p class="section-desc">The admin, the orders, the spreadsheets — it adds up fast. Here's what's killing your time.</p>
+      <p class="section-desc">The admin, the spreadsheets, the inbox — it adds up fast. Here's what's killing your time.</p>
     </div>
 
     <div class="pain-grid">
-      <div class="pain-card">
-        <div class="pain-icon">📋</div>
-        <h3>Manual Inventory Is a Full-Time Job</h3>
-        <p>You're counting kegs, tallying stock, and chasing down what's low — by hand. Every single week. Meanwhile, real work is piling up.</p>
+      <div class="pain-card fade-in">
+        <div class="pain-icon">&#9993;</div>
+        <h3>Event inquiries sitting in your inbox for days</h3>
+        <a href="#automations" class="pain-link">We fixed this &rarr;</a>
       </div>
 
-      <div class="pain-card">
-        <div class="pain-icon">📞</div>
-        <h3>Ordering Takes Hours You Don't Have</h3>
-        <p>Phone calls, emails, fax (still?), rep callbacks — coordinating orders across multiple vendors burns your mornings. Every order, every time.</p>
+      <div class="pain-card fade-in delay-1">
+        <div class="pain-icon">&#9881;</div>
+        <h3>Guessing what to brew next based on gut feel</h3>
+        <a href="#automations" class="pain-link">We fixed this &rarr;</a>
       </div>
 
-      <div class="pain-card">
-        <div class="pain-icon">📣</div>
-        <h3>Marketing? You'll Get to It. Someday.</h3>
-        <p>The Instagram post that never happened, the email list you haven't touched, the event you never promoted. There's never enough time left over.</p>
+      <div class="pain-card fade-in delay-2">
+        <div class="pain-icon">&#128200;</div>
+        <h3>Spending hours hand-coding financial reports</h3>
+        <a href="#automations" class="pain-link">We fixed this &rarr;</a>
+      </div>
+
+      <div class="pain-card fade-in delay-3">
+        <div class="pain-icon">&#128227;</div>
+        <h3>Marketing that never gets off the to-do list</h3>
+        <span class="pain-link" style="color: var(--warning)">Coming soon &rarr;</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Automations Showcase ── -->
+  <section id="automations">
+    <div class="section-header fade-in">
+      <span class="section-label">What we build</span>
+      <h2 class="section-title">Automations That <em>Actually</em> Run</h2>
+      <p class="section-desc">We build custom automations for any repetitive process. Here's what we've built so far &mdash; all live in production at Diamondback Brewing Co.</p>
+    </div>
+
+    <div class="auto-tabs fade-in">
+      <div class="auto-tab-bar">
+        <input type="radio" name="auto-tab" id="tab-events" class="auto-tab-radio" checked>
+        <label for="tab-events">Event Intake</label>
+
+        <input type="radio" name="auto-tab" id="tab-kegs" class="auto-tab-radio">
+        <label for="tab-kegs">Keg Management</label>
+
+        <input type="radio" name="auto-tab" id="tab-finance" class="auto-tab-radio">
+        <label for="tab-finance">Financial Reporting</label>
+
+        <input type="radio" name="auto-tab" id="tab-marketing" class="auto-tab-radio">
+        <label for="tab-marketing">Marketing</label>
+      </div>
+
+      <div class="auto-panels">
+        <!-- Event Intake -->
+        <div class="auto-panel active" id="panel-events">
+          <div class="auto-panel-header">
+            <h3>Event Intake Automation</h3>
+            <span class="status-badge live"><span class="status-dot"></span> Live</span>
+          </div>
+          <div class="auto-compare">
+            <div class="auto-before">
+              <h4>Before</h4>
+              <p>60+ event inquiries per month, each one handled by hand. Read the email, check the calendar, write a response, attach pricing. 5-10 minutes per request. Response time: 24-48 hours. Lost bookings every week.</p>
+            </div>
+            <div class="auto-after">
+              <h4>After</h4>
+              <p>Every inquiry gets an instant auto-response with pricing attached. All contact details and event info logged to CRM automatically. Zero missed inquiries. Response time under 60 seconds. Nobody on the team touches it.</p>
+            </div>
+          </div>
+          <div class="auto-stat-row">
+            <div class="auto-stat">
+              <span class="auto-stat-num">5h</span>
+              <span class="auto-stat-label">Saved/week</span>
+            </div>
+            <div class="auto-stat">
+              <span class="auto-stat-num">&lt;60s</span>
+              <span class="auto-stat-label">Response time</span>
+            </div>
+            <div class="auto-stat">
+              <span class="auto-stat-num">0</span>
+              <span class="auto-stat-label">Missed inquiries</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Keg Management -->
+        <div class="auto-panel" id="panel-kegs">
+          <div class="auto-panel-header">
+            <h3>Keg Management + Production Forecasting</h3>
+            <span class="status-badge live"><span class="status-dot"></span> Live</span>
+          </div>
+          <div class="auto-compare">
+            <div class="auto-before">
+              <h4>Before</h4>
+              <p>Tracking kegs in a spreadsheet. Just counts, no real data. Planning the brew schedule based on gut feel and a whiteboard. Running out of your best sellers on a Friday night.</p>
+            </div>
+            <div class="auto-after">
+              <h4>After</h4>
+              <p>Plug in keg inventory and weekly sales from both locations. The system tells you exactly how many days each beer has left on tap. Production pipeline is planned around real data. No beer kicks without a replacement ready.</p>
+            </div>
+          </div>
+          <div class="auto-stat-row">
+            <div class="auto-stat">
+              <span class="auto-stat-num">2h</span>
+              <span class="auto-stat-label">Saved/week</span>
+            </div>
+            <div class="auto-stat">
+              <span class="auto-stat-num">0</span>
+              <span class="auto-stat-label">Kegs kicked<br>without a backup</span>
+            </div>
+            <div class="auto-stat">
+              <span class="auto-stat-num">100%</span>
+              <span class="auto-stat-label">Data-driven<br>brew schedule</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Financial Reporting -->
+        <div class="auto-panel" id="panel-finance">
+          <div class="auto-panel-header">
+            <h3>Financial Summarization</h3>
+            <span class="status-badge live"><span class="status-dot"></span> Live</span>
+          </div>
+          <div class="auto-compare">
+            <div class="auto-before">
+              <h4>Before</h4>
+              <p>Download the QuickBooks report, open the budget spreadsheet, spend two hours pulling numbers and hand-coding them line by line. Budget column, actual column. Every single month.</p>
+            </div>
+            <div class="auto-after">
+              <h4>After</h4>
+              <p>Download the monthly CSV, feed it to the system. Every actual number drops right next to the budget number automatically. Instant budget vs. actual comparison. The report you used to dread takes two minutes.</p>
+            </div>
+          </div>
+          <div class="auto-stat-row">
+            <div class="auto-stat">
+              <span class="auto-stat-num">2h</span>
+              <span class="auto-stat-label">Saved/month</span>
+            </div>
+            <div class="auto-stat">
+              <span class="auto-stat-num">100%</span>
+              <span class="auto-stat-label">Automated export</span>
+            </div>
+            <div class="auto-stat">
+              <span class="auto-stat-num">0</span>
+              <span class="auto-stat-label">Manual data entry</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Marketing -->
+        <div class="auto-panel" id="panel-marketing">
+          <div class="auto-panel-header">
+            <h3>Marketing Automation</h3>
+            <span class="status-badge coming"><span class="status-dot"></span> Coming Soon</span>
+          </div>
+          <div class="auto-compare">
+            <div class="auto-before">
+              <h4>The Problem</h4>
+              <p>Social posts planned but never published. Email campaigns that never get sent. Events that go unpromoted. Marketing always gets pushed to "later" because there's always something more urgent.</p>
+            </div>
+            <div class="auto-after">
+              <h4>What We're Building</h4>
+              <p>Automated content scheduling, event promotion, and email drip campaigns. The marketing that keeps slipping to the bottom of your list will run itself.</p>
+            </div>
+          </div>
+          <div style="padding-top: 24px; border-top: 1px solid var(--border); text-align: center;">
+            <p style="font-size: 0.875rem; color: var(--muted);">Interested in being a pilot tester? <a href="#waitlist" style="color: var(--accent); font-weight: 600;">Book a free audit</a> and we'll talk about it.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ── How It Works ── -->
   <section id="how-it-works">
-    <div class="container">
-      <div class="section-header" style="text-align:center; margin-bottom: 56px;">
-        <span class="section-label">How it works</span>
-        <h2 class="section-title">Up and Running in Days,<br>Not Months</h2>
+    <div class="section-header fade-in" style="text-align:center;">
+      <span class="section-label">How it works</span>
+      <h2 class="section-title">Up and Running in Days,<br>Not Months</h2>
+    </div>
+    <div class="steps-row">
+      <div class="step fade-in">
+        <div class="step-number">01</div>
+        <h3>Free Audit Call</h3>
+        <p>We spend 30 minutes learning your operation &mdash; what's eating your time, what tools you use, where the biggest gaps are.</p>
+        <div class="step-timeline">Day 1</div>
       </div>
-      <div class="steps-row">
-        <div class="step">
-          <div class="step-number">01</div>
-          <div class="step-content">
-            <h3>Free Audit Call</h3>
-            <p>We spend 30 minutes learning your operation — what's eating your time, what tools you use, where the biggest gaps are.</p>
-          </div>
-        </div>
-        <div class="step-arrow">→</div>
-        <div class="step">
-          <div class="step-number">02</div>
-          <div class="step-content">
-            <h3>We Build It</h3>
-            <p>We design and build your automation in days, not months. You review it before anything goes live. No surprises.</p>
-          </div>
-        </div>
-        <div class="step-arrow">→</div>
-        <div class="step">
-          <div class="step-number">03</div>
-          <div class="step-content">
-            <h3>It Runs. You Don't.</h3>
-            <p>Your automation runs in the background 24/7. We monitor it, maintain it, and improve it over time. You just run your business.</p>
-          </div>
-        </div>
+      <div class="step-arrow">&rarr;</div>
+      <div class="step fade-in delay-1">
+        <div class="step-number">02</div>
+        <h3>We Build It</h3>
+        <p>We design and build your automation in days, not months. You review it before anything goes live. No surprises.</p>
+        <div class="step-timeline">Days 2&ndash;5</div>
+      </div>
+      <div class="step-arrow">&rarr;</div>
+      <div class="step fade-in delay-2">
+        <div class="step-number">03</div>
+        <h3>It Runs. You Don't.</h3>
+        <p>Your automation runs 24/7. We monitor it, maintain it, and improve it over time. You just run your business.</p>
+        <div class="step-timeline">Day 5+</div>
       </div>
     </div>
   </section>
 
-  <!-- ── Social Proof / Founder Quote ── -->
+  <!-- ── Our Story ── -->
   <section id="proof">
-    <div style="text-align:center; margin-bottom: 48px;">
+    <div class="fade-in" style="text-align:center; margin-bottom: 48px;">
       <span class="section-label">Our story</span>
       <h2 class="section-title">Built by an Operator,<br>for Operators</h2>
     </div>
-    <div class="proof-quote-wrap">
-      <div class="founder-photo-wrap">
-        <img src="tom.jpg" alt="Tom F., Founder of Workhorse AI" class="founder-photo">
-      </div>
+
+    <div class="proof-quote-wrap fade-in">
+      <img src="tom.jpg" alt="Tom Foster, Founder of Workhorse AI" class="founder-photo">
       <blockquote class="founder-quote">
-        I built this because I needed it. Running a brewery, I was drowning in admin work every week. These tools saved me real hours — so I made them available to everyone running a place like mine.
+        I built Workhorse because I was the one drowning in admin. Running Diamondback, I spent more time on spreadsheets than on beer. Now four automations run my back office &mdash; and I'm making them available to every operator like me.
       </blockquote>
     </div>
-    <p class="proof-attribution">— Tom F., Founder &nbsp;·&nbsp; Owner, Diamondback Brewing Co.</p>
+    <p class="proof-attr fade-in">&mdash; Tom Foster, Founder &nbsp;&middot;&nbsp; Owner, Diamondback Brewing Co.</p>
 
-    <div class="case-study-card">
-      <div class="case-study-brewery-photo">
-        <img src="brewery.jpg" alt="Diamondback Brewing Co. taproom" class="brewery-photo">
-      </div>
-      <div class="case-study-tag">Live in Production — Diamondback Brewing Co.</div>
-      <h3>Event Intake Automation:<br>Diamondback Brewing Co.</h3>
-      <p>60 event requests per month. Each one used to mean manually entering contact info into a spreadsheet, then sending a follow-up email with our pricing PDF — 5–10 minutes per request, every time. Now it's zero.</p>
-      <p>The tool auto-replies instantly with our info and pricing PDF, then logs all event details and contact info directly into our CRM — no human touch required.</p>
+    <div class="case-study-card fade-in">
+      <img src="brewery.jpg" alt="Diamondback Brewing Co. taproom" class="case-study-photo">
+      <div class="case-study-body">
+        <div class="case-study-tag"><span class="status-dot" style="background: var(--success); width: 8px; height: 8px; border-radius: 50%; display: inline-block;"></span> &nbsp;Live in Production &mdash; Diamondback Brewing Co.</div>
+        <h3>Total Impact</h3>
+        <p>Multiple automations running one brewery's entire back office &mdash; from event intake to production forecasting to financial reporting.</p>
 
-      <div class="stats-row">
-        <div class="stat">
-          <span class="stat-number">5h</span>
-          <span class="stat-label">Saved every<br>week</span>
+        <div class="stats-row">
+          <div class="stat">
+            <span class="stat-number">30+</span>
+            <span class="stat-label">Hours saved<br>per month</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">0</span>
+            <span class="stat-label">Manual<br>data entry</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">&lt;60s</span>
+            <span class="stat-label">Response<br>time</span>
+          </div>
         </div>
-        <div class="stat">
-          <span class="stat-number">0</span>
-          <span class="stat-label">Missed event<br>requests</span>
-        </div>
-        <div class="stat">
-          <span class="stat-number">&lt;60s</span>
-          <span class="stat-label">Response time<br>(was 24–48h)</span>
-        </div>
-      </div>
-
-      <div style="text-align:center;">
-        <span class="coming-soon-badge">Full case study dropping at launch</span>
       </div>
     </div>
   </section>
 
   <!-- ── FAQ ── -->
   <section id="faq">
-    <div style="max-width: 720px; margin: 0 auto; text-align: center; padding: 0 24px;">
-      <div class="section-header" style="text-align:center; margin-bottom: 48px;">
+    <div style="max-width: 720px; margin: 0 auto;">
+      <div class="section-header fade-in" style="text-align:center;">
         <span class="section-label">FAQ</span>
         <h2 class="section-title">Common Questions</h2>
       </div>
-      <div class="faq-list">
+      <div class="faq-list fade-in">
         <details class="faq-item">
           <summary class="faq-q">Do I need to be technical?</summary>
-          <p class="faq-a">Not at all. We handle everything — you just describe your problem in plain English. If you can explain how your business works over a phone call, we can automate it.</p>
+          <p class="faq-a">Not at all. We handle everything &mdash; you just describe your problem in plain English. If you can explain how your business works over a phone call, we can automate it.</p>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">How much does it cost?</summary>
+          <p class="faq-a">Flat-rate pricing based on complexity. A single automation starts at $750. Multi-step workflows run $1,500&ndash;2,500. No hourly billing, no surprise invoices. We'll give you an exact number after the audit call.</p>
         </details>
         <details class="faq-item">
           <summary class="faq-q">How long does it take to get set up?</summary>
-          <p class="faq-a">Most simple automations are live within 3–5 business days after the audit call. More complex workflows typically take 1–2 weeks. We'll give you a clear timeline upfront.</p>
+          <p class="faq-a">Most single automations are live within 1&ndash;2 days. More complex workflows typically take about a week. We'll give you a clear timeline upfront.</p>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">What automations do you offer?</summary>
+          <p class="faq-a">Right now we have four proven automations: event intake, keg management + production forecasting, financial summarization, and marketing automation (coming soon). We also build custom workflows for your specific operation.</p>
         </details>
         <details class="faq-item">
           <summary class="faq-q">What tools do you use?</summary>
-          <p class="faq-a">We work with whatever you already have — your existing POS, email, forms, and spreadsheets. We don't force you to switch platforms. If you use Toast, Square, Google Workspace, or anything else, we build around it.</p>
+          <p class="faq-a">We work with whatever you already have &mdash; your existing POS, email, forms, and spreadsheets. We don't force you to switch platforms. If you use Toast, Square, Google Workspace, or anything else, we build around it.</p>
         </details>
         <details class="faq-item">
           <summary class="faq-q">What if something breaks?</summary>
-          <p class="faq-a">That's what the monthly retainer covers. We monitor your automations and fix issues fast — usually before you even notice. You're not on your own after launch.</p>
+          <p class="faq-a">That's what the monthly retainer covers. We monitor your automations and fix issues fast &mdash; usually before you even notice. You're not on your own after launch.</p>
         </details>
         <details class="faq-item">
           <summary class="faq-q">What's the free audit, exactly?</summary>
-          <p class="faq-a">It's a 30-minute call where we review your operations, identify your top 2–3 automation opportunities, and give you a clear action plan — whether you work with us or not. No pitch, no pressure.</p>
+          <p class="faq-a">A 30-minute call where we review your operations, identify your top 2&ndash;3 automation opportunities, and give you a clear action plan &mdash; whether you work with us or not. No pitch, no pressure.</p>
         </details>
         <details class="faq-item">
-          <summary class="faq-q">I'm not in food &amp; beverage — can you still help?</summary>
-          <p class="faq-a">Probably. We started in F&amp;B but the problems we solve — manual intake, data entry, ordering, follow-ups — exist in almost every service business. Reach out and we'll be honest about whether it's a good fit.</p>
+          <summary class="faq-q">I'm not in food &amp; beverage &mdash; can you still help?</summary>
+          <p class="faq-a">Probably. We started in F&amp;B but the problems we solve &mdash; manual intake, data entry, ordering, follow-ups &mdash; exist in almost every service business. Reach out and we'll be honest about whether it's a good fit.</p>
         </details>
       </div>
     </div>
@@ -1170,10 +1350,10 @@
 
   <!-- ── Waitlist / Contact ── -->
   <section id="waitlist">
-    <div class="waitlist-header">
+    <div class="waitlist-header fade-in">
       <span class="section-label">Get started</span>
       <h2>Let's Put Your Business on Autopilot</h2>
-      <p>We work directly with small business owners to cut out the manual work eating your time and margin. Start with a free 30-minute audit — no pressure, no commitment.</p>
+      <p>We work directly with small business owners to cut out the manual work eating your time and margin. Start with a free 30-minute audit.</p>
 
       <ul class="perks">
         <li>Flat-rate, no-surprise pricing</li>
@@ -1183,7 +1363,7 @@
       </ul>
     </div>
 
-    <div class="waitlist-form-wrap">
+    <div class="waitlist-form-wrap fade-in">
       <form class="contact-form" action="https://formspree.io/f/maqpgbqv" method="POST" id="audit-form">
         <div class="form-group">
           <label for="name">Your Name</label>
@@ -1193,7 +1373,6 @@
           <label for="email2">Email Address</label>
           <input type="email" id="email2" name="email" placeholder="you@yourbusiness.com" required />
         </div>
-
         <div class="form-group">
           <label for="biztype">Type of Business</label>
           <select id="biztype" name="business_type">
@@ -1206,34 +1385,28 @@
             <option value="other">Other</option>
           </select>
         </div>
+        <div class="form-group">
+          <label for="interest">What are you most interested in?</label>
+          <select id="interest" name="interest">
+            <option value="" selected>Select one (optional)</option>
+            <option value="event-intake">Event intake automation</option>
+            <option value="inventory">Inventory / keg management</option>
+            <option value="financial">Financial reporting</option>
+            <option value="marketing">Marketing automation</option>
+            <option value="not-sure">Not sure &mdash; help me figure it out</option>
+          </select>
+        </div>
 
-        <button type="submit" class="btn-submit">Book My Free Audit →</button>
+        <button type="submit" class="btn-submit">Book My Free Audit &rarr;</button>
         <p class="form-note">We'll reach out personally within 24 hours. No spam, ever.</p>
+        <p class="form-social-proof">Join Diamondback Brewing and other operators already saving 30+ hours/month.</p>
       </form>
 
       <div id="form-success" style="display:none;">
-        <div class="success-icon">✓</div>
+        <div class="success-icon">&#10003;</div>
         <h3>We got it.</h3>
         <p>We'll reach out personally within 24 hours to schedule your free audit.</p>
       </div>
-
-      <script>
-        var form = document.getElementById('audit-form');
-        form.addEventListener('submit', function(e) {
-          e.preventDefault();
-          var data = new FormData(form);
-          fetch(form.action, {
-            method: 'POST',
-            body: data,
-            headers: { 'Accept': 'application/json' }
-          }).then(function(response) {
-            if (response.ok) {
-              form.style.display = 'none';
-              document.getElementById('form-success').style.display = 'block';
-            }
-          });
-        });
-      </script>
     </div>
   </section>
 
@@ -1242,17 +1415,106 @@
     <div class="footer-logo">
       <img src="logo-full.png" alt="Workhorse AI" style="width: 200px; height: auto; display: block; margin: 0 auto 12px;">
     </div>
+    <div class="footer-tagline">Built in Baltimore.</div>
     <div class="footer-links">
       <a href="#hero">Home</a>
       <a href="#pain">Why Workhorse</a>
+      <a href="#automations">What We Build</a>
       <a href="#how-it-works">How It Works</a>
       <a href="#proof">Our Story</a>
       <a href="#faq">FAQ</a>
       <a href="#waitlist">Book a Free Audit</a>
+      <a href="https://instagram.com/workhorseai" target="_blank" rel="noopener">Instagram</a>
       <a href="mailto:hello@theworkhorse.ai">Contact</a>
     </div>
-    <div class="footer-copy">© 2026 Workhorse AI. All rights reserved. &nbsp;·&nbsp; theworkhorse.ai</div>
+    <div class="footer-copy">&copy; 2026 Workhorse AI. All rights reserved. &nbsp;&middot;&nbsp; theworkhorse.ai</div>
   </footer>
+
+  <!-- ── Scripts ── -->
+  <script>
+    // Nav scroll effect
+    (function() {
+      var nav = document.getElementById('main-nav');
+      window.addEventListener('scroll', function() {
+        nav.classList.toggle('scrolled', window.scrollY > 20);
+      }, { passive: true });
+    })();
+
+    // Mobile nav
+    (function() {
+      var hamburger = document.getElementById('hamburger');
+      var mobileNav = document.getElementById('mobile-nav');
+      var links = mobileNav.querySelectorAll('a');
+
+      hamburger.addEventListener('click', function() {
+        hamburger.classList.toggle('active');
+        mobileNav.classList.toggle('open');
+        document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+      });
+
+      links.forEach(function(link) {
+        link.addEventListener('click', function() {
+          hamburger.classList.remove('active');
+          mobileNav.classList.remove('open');
+          document.body.style.overflow = '';
+        });
+      });
+    })();
+
+    // Scroll-triggered fade-in animations
+    (function() {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.fade-in').forEach(function(el) {
+        observer.observe(el);
+      });
+    })();
+
+    // Tab switching for automations
+    (function() {
+      var radios = document.querySelectorAll('.auto-tab-radio');
+      var panels = document.querySelectorAll('.auto-panel');
+      var panelMap = {
+        'tab-events': 'panel-events',
+        'tab-kegs': 'panel-kegs',
+        'tab-finance': 'panel-finance',
+        'tab-marketing': 'panel-marketing'
+      };
+
+      radios.forEach(function(radio) {
+        radio.addEventListener('change', function() {
+          panels.forEach(function(p) { p.classList.remove('active'); });
+          var target = document.getElementById(panelMap[radio.id]);
+          if (target) target.classList.add('active');
+        });
+      });
+    })();
+
+    // Form submission
+    (function() {
+      var form = document.getElementById('audit-form');
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var data = new FormData(form);
+        fetch(form.action, {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        }).then(function(response) {
+          if (response.ok) {
+            form.style.display = 'none';
+            document.getElementById('form-success').style.display = 'block';
+          }
+        });
+      });
+    })();
+  </script>
 
 </body>
 </html>
