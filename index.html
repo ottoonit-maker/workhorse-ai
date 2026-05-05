@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Workhorse AI — AI Automation for Restaurants & Breweries</title>
-  <meta name="description" content="Workhorse AI automates the grind so you can get back to running your business. Built by a brewery owner, for F&B operators." />
+  <title>Workhorse AI — Automation Built by an Operator</title>
+  <meta name="description" content="Operations that run themselves. Outbound sales agents that find your next account. Built by an operator, for operators." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -1013,7 +1013,7 @@
   <section id="hero">
     <div class="hero-eyebrow fade-in">Saving Operators 30+ Hours/Month</div>
     <h1 class="fade-in delay-1">We Do the <em>Heavy</em> Lifting.<br>You Run Your Business.</h1>
-    <p class="hero-sub fade-in delay-2">We build custom automations for restaurants and breweries &mdash; event intake, inventory, production, reporting, whatever's eating your hours. Built by an operator, for operators.</p>
+    <p class="hero-sub fade-in delay-2">Operations that run themselves. Outbound agents that find your next account. Built by an operator, for operators.</p>
 
     <div class="hero-buttons fade-in delay-3">
       <a href="#waitlist" class="btn-primary">Book a Free Audit &rarr;</a>
@@ -1022,10 +1022,10 @@
     <p class="hero-fine fade-in delay-3">Free 30-minute call. No commitment. No pitch.</p>
 
     <div class="hero-tags fade-in delay-4">
-      <span class="hero-tag">Breweries</span>
-      <span class="hero-tag">Restaurants</span>
-      <span class="hero-tag">Bars &amp; Taprooms</span>
-      <span class="hero-tag">Cafes</span>
+      <span class="hero-tag">Bars &amp; Restaurants</span>
+      <span class="hero-tag">Roasters &amp; Producers</span>
+      <span class="hero-tag">Specialty Food</span>
+      <span class="hero-tag">Wholesale &amp; B2B</span>
     </div>
   </section>
 
@@ -1083,9 +1083,9 @@
       </div>
 
       <div class="pain-card fade-in delay-3">
-        <div class="pain-icon">&#128227;</div>
-        <h3>Marketing that never gets off the to-do list</h3>
-        <span class="pain-link" style="color: var(--warning)">Coming soon &rarr;</span>
+        <div class="pain-icon">&#128178;</div>
+        <h3>Wholesale accounts you don't have time to chase</h3>
+        <a href="#automations" class="pain-link">We fixed this &rarr;</a>
       </div>
     </div>
   </section>
@@ -1109,8 +1109,8 @@
         <input type="radio" name="auto-tab" id="tab-finance" class="auto-tab-radio">
         <label for="tab-finance">Financial Reporting</label>
 
-        <input type="radio" name="auto-tab" id="tab-marketing" class="auto-tab-radio">
-        <label for="tab-marketing">Marketing</label>
+        <input type="radio" name="auto-tab" id="tab-outbound" class="auto-tab-radio">
+        <label for="tab-outbound">Outbound Sales Agent</label>
       </div>
 
       <div class="auto-panels">
@@ -1210,24 +1210,35 @@
           </div>
         </div>
 
-        <!-- Marketing -->
-        <div class="auto-panel" id="panel-marketing">
+        <!-- Outbound Sales Agent -->
+        <div class="auto-panel" id="panel-outbound">
           <div class="auto-panel-header">
-            <h3>Marketing Automation</h3>
-            <span class="status-badge coming"><span class="status-dot"></span> Coming Soon</span>
+            <h3>Outbound Sales Agent</h3>
+            <span class="status-badge live"><span class="status-dot"></span> Live</span>
           </div>
           <div class="auto-compare">
             <div class="auto-before">
-              <h4>The Problem</h4>
-              <p>Social posts planned but never published. Email campaigns that never get sent. Events that go unpromoted. Marketing always gets pushed to "later" because there's always something more urgent.</p>
+              <h4>Before</h4>
+              <p>Wholesale or B2B accounts to grow, no one with time to prospect. Cold outreach is hours a week. SDR hires don't stick. Agencies are generic. Pipeline keeps drying up.</p>
             </div>
             <div class="auto-after">
-              <h4>What We're Building</h4>
-              <p>Automated content scheduling, event promotion, and email drip campaigns. The marketing that keeps slipping to the bottom of your list will run itself.</p>
+              <h4>After</h4>
+              <p>An autonomous agent finds qualified prospects across your target geography, runs sequenced cold email, and triages every reply. Built and shipped for George Howe Company.</p>
             </div>
           </div>
-          <div style="padding-top: 24px; border-top: 1px solid var(--border); text-align: center;">
-            <p style="font-size: 0.875rem; color: var(--muted);">Interested in being a pilot tester? <a href="#waitlist" style="color: var(--accent); font-weight: 600;">Book a free audit</a> and we'll talk about it.</p>
+          <div class="auto-stat-row">
+            <div class="auto-stat">
+              <span class="auto-stat-num">500+</span>
+              <span class="auto-stat-label">Prospects sourced</span>
+            </div>
+            <div class="auto-stat">
+              <span class="auto-stat-num">20-25</span>
+              <span class="auto-stat-label">Sends per day</span>
+            </div>
+            <div class="auto-stat">
+              <span class="auto-stat-num">&lt;2h</span>
+              <span class="auto-stat-label">Weekly oversight</span>
+            </div>
           </div>
         </div>
       </div>
@@ -1484,7 +1495,7 @@
         'tab-events': 'panel-events',
         'tab-kegs': 'panel-kegs',
         'tab-finance': 'panel-finance',
-        'tab-marketing': 'panel-marketing'
+        'tab-outbound': 'panel-outbound'
       };
 
       radios.forEach(function(radio) {
